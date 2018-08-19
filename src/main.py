@@ -8,6 +8,7 @@ def main ():
 
     pygame.display.set_caption("2d platform game it")
     screen = pygame.display.set_mode((1600, 900))
+    screen.fill((100, 100, 100))
     running = True
 
     lastFrameTicks = 0
@@ -22,6 +23,7 @@ def main ():
         t = pygame.time.get_ticks()
         deltaTime = (t - lastFrameTicks) / 1000.0
         lastFrameTicks = t
-
+        player.draw(screen)
+        pygame.display.update()
 
 main();
