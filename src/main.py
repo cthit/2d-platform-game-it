@@ -20,7 +20,7 @@ def main ():
         t = pygame.time.get_ticks()
         deltaTime = (t - lastFrameTicks) / 1000.0
         lastFrameTicks = t
-        apa = Character(0, 0, "character", 1)
+        player = Character(0, 0, "character", 1)
 
 
 main();
