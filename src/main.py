@@ -1,6 +1,7 @@
 import pygame
 
 from entities.character.Character import Character
+from src.LevelData import LevelData
 
 
 def main ():
@@ -11,6 +12,7 @@ def main ():
     screen.fill((100, 100, 100))
     running = True
 
+    DATA = LevelData(10)
     lastFrameTicks = 0
 
     player = Character(200, 200, "character", 10)
@@ -23,6 +25,7 @@ def main ():
         t = pygame.time.get_ticks()
         deltaTime = (t - lastFrameTicks) / 1000.0
         lastFrameTicks = t
+        player.update(deltaTime, DATA)
         player.draw(screen)
         pygame.display.update()
 
