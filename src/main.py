@@ -1,5 +1,8 @@
 import pygame
 
+from entities.character.Character import Character
+
+
 def main ():
     pygame.init()
 
@@ -17,5 +20,7 @@ def main ():
         t = pygame.time.get_ticks()
         deltaTime = (t - lastFrameTicks) / 1000.0
         lastFrameTicks = t
+        apa = Character(0, 0, "character", 1)
+
 
 main();
