@@ -19,3 +19,6 @@ class Entity:
 
     def draw(self, screen):
         screen.blit(self.sprite, (self.x, self.y))
+
+    def get_bottom_pos(self):
+        return self.y + (self.sprite.get_rect().height / 2)
