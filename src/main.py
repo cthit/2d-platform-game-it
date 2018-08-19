@@ -9,14 +9,14 @@ def main ():
 
     pygame.display.set_caption("2d platform game it")
     screen = pygame.display.set_mode((1600, 900))
-    screen.fill((100, 100, 100))
     running = True
 
-    DATA = LevelData(10)
+    DATA = LevelData(98.2)
     lastFrameTicks = 0
 
     player = Character(200, 200, "character", 10)
     while (running):
+        screen.fill((100, 100, 100))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
