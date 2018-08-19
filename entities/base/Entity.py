@@ -1,4 +1,4 @@
-class entity:
+class Entity:
 
     def __init__(self, spawnX, spawnY, name):
         self.spawnX = spawnX

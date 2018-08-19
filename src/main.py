@@ -13,8 +13,9 @@ def main ():
             if event.type == pygame.QUIT:
                 running = False
 
-        # Calculate deltaTime 
+        # Calculate deltaTime
         t = pygame.time.get_ticks()
         deltaTime = (t - lastFrameTicks) / 1000.0
         lastFrameTicks = t
+
 main();
