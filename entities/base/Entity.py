@@ -1,10 +1,10 @@
 class Entity:
 
-    def __init__(self, spawnX, spawnY, name):
-        self.spawnX = spawnX
-        self.spawnY = spawnY
+    def __init__(self, x, y, name):
+        self.spawnX = x
+        self.spawnY = y
         self.name = name
 
-    def update(deltaTime):
-        return
+    def update(self, deltaTime, state):
+        self.y -= state.gravity * deltaTime;
 
