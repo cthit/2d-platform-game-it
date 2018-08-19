@@ -8,7 +8,7 @@ class Tile:
 
     def __init__(self, x, y, name):
         self.name = name
-        self.x = y
+        self.x = x
         self.y = y
         path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../" + name + "/" + name + ".png")
         try:
