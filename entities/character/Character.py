@@ -7,4 +7,4 @@ class Character(Entity):
         self.movementSpeed = movementSpeed
 
     def update(self, deltaTime, state):
-        return
+        self.y = self.y + (deltaTime * state.gravity)
