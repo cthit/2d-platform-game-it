@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6681d20e-3bf9-4f4b-af6e-860e74285042" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/entities/base/Entity.py" afterPath="$PROJECT_DIR$/entities/base/Entity.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main.py" afterPath="$PROJECT_DIR$/src/main.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,11 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" column="8" lean-forward="false" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
+            <state relative-caret-position="238">
+              <caret line="14" column="48" lean-forward="false" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -39,11 +38,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Entity.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Entity.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/entities/base/Entity.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="54" lean-forward="false" selection-start-line="14" selection-start-column="54" selection-end-line="14" selection-end-column="54" />
+            <state relative-caret-position="170">
+              <caret line="10" column="105" lean-forward="false" selection-start-line="10" selection-start-column="105" selection-end-line="10" selection-end-column="105" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -83,8 +82,8 @@
         <option value="$PROJECT_DIR$/tiles/base/tiles.py" />
         <option value="$PROJECT_DIR$/tiles/character/character.py" />
         <option value="$PROJECT_DIR$/tiles/character/Character.py" />
-        <option value="$PROJECT_DIR$/src/main.py" />
         <option value="$PROJECT_DIR$/entities/base/Entity.py" />
+        <option value="$PROJECT_DIR$/src/main.py" />
       </list>
     </option>
   </component>
@@ -282,22 +281,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.py">
+    <entry file="file://$PROJECT_DIR$/entities/base/Entity.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="8" lean-forward="false" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
+        <state relative-caret-position="170">
+          <caret line="10" column="105" lean-forward="false" selection-start-line="10" selection-start-column="105" selection-end-line="10" selection-end-column="105" />
           <folding>
-            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/entities/base/Entity.py">
+    <entry file="file://$PROJECT_DIR$/src/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
-          <caret line="14" column="54" lean-forward="false" selection-start-line="14" selection-start-column="54" selection-end-line="14" selection-end-column="54" />
+          <caret line="14" column="48" lean-forward="false" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>

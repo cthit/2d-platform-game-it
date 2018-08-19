@@ -11,6 +11,8 @@ def main ():
     running = True
 
     lastFrameTicks = 0
+
+    player = Character(200, 200, "character", 10)
     while (running):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -20,7 +22,6 @@ def main ():
         t = pygame.time.get_ticks()
         deltaTime = (t - lastFrameTicks) / 1000.0
         lastFrameTicks = t
-        player = Character(0, 0, "character", 1)
 
 
 main();
