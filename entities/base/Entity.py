@@ -9,7 +9,10 @@ class Entity:
         self.spawnY = y
         self.name = name
         path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../" + name + "/" + name + ".png")
-        self.sprite = pygame.image.load(path)
+        try:
+            self.sprite = pygame.image.load(path)
+        except:
+            print("Could not load sprite for " + name)
 
     def update(self, deltaTime, state):
         self.y -= state.gravity * deltaTime;
