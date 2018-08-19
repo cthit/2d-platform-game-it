@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6681d20e-3bf9-4f4b-af6e-860e74285042" name="Default" comment="" />
+    <list default="true" id="6681d20e-3bf9-4f4b-af6e-860e74285042" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/entities/base/Entity.py" afterPath="$PROJECT_DIR$/entities/base/Entity.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/tiles/character/Character.py" afterPath="$PROJECT_DIR$/entities/character/Character.py" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,8 +27,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Character.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/tiles/character/Character.py">
+      <file leaf-file-name="Character.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/entities/character/Character.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
               <caret line="5" column="34" lean-forward="false" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
@@ -34,12 +37,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Entity.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Entity.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/entities/base/Entity.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="8" lean-forward="true" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
-              <folding />
+            <state relative-caret-position="170">
+              <caret line="10" column="73" lean-forward="false" selection-start-line="10" selection-start-column="73" selection-end-line="10" selection-end-column="73" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -76,8 +81,8 @@
         <option value="$PROJECT_DIR$/entities/base/entity.py" />
         <option value="$PROJECT_DIR$/tiles/base/tiles.py" />
         <option value="$PROJECT_DIR$/tiles/character/character.py" />
-        <option value="$PROJECT_DIR$/entities/base/Entity.py" />
         <option value="$PROJECT_DIR$/tiles/character/Character.py" />
+        <option value="$PROJECT_DIR$/entities/base/Entity.py" />
       </list>
     </option>
   </component>
@@ -126,6 +131,12 @@
             <path>
               <item name="2d-platform-game-it" type="b2602c69:ProjectViewProjectNode" />
               <item name="2d-platform-game-it" type="462c0819:PsiDirectoryNode" />
+              <item name="entities" type="462c0819:PsiDirectoryNode" />
+              <item name="character" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="2d-platform-game-it" type="b2602c69:ProjectViewProjectNode" />
+              <item name="2d-platform-game-it" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -138,12 +149,6 @@
               <item name="2d-platform-game-it" type="462c0819:PsiDirectoryNode" />
               <item name="tiles" type="462c0819:PsiDirectoryNode" />
               <item name="base" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="2d-platform-game-it" type="b2602c69:ProjectViewProjectNode" />
-              <item name="2d-platform-game-it" type="462c0819:PsiDirectoryNode" />
-              <item name="tiles" type="462c0819:PsiDirectoryNode" />
-              <item name="character" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -158,6 +163,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\digIT\2d-platform-game-it\entities" />
       <recent name="D:\digIT\2d-platform-game-it\src" />
     </key>
   </component>
@@ -266,6 +272,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/entities/character/Character.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="34" lean-forward="false" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -276,17 +290,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/entities/base/Entity.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="8" lean-forward="true" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tiles/character/Character.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="34" lean-forward="false" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
-          <folding />
+        <state relative-caret-position="170">
+          <caret line="10" column="73" lean-forward="false" selection-start-line="10" selection-start-column="73" selection-end-line="10" selection-end-column="73" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
