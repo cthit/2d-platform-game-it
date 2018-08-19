@@ -4,7 +4,7 @@ def main ():
     pygame.init()
 
     pygame.display.set_caption("2d platform game it")
-    screen = pygame.display.set_mode((1600, 900))
+    screen = pygame.display.set_mode((800, 450))
     running = True
 
     while (running):
@@ -12,4 +12,4 @@ def main ():
             if event.type == pygame.QUIT:
                 running = False
 
-main();
+main()
