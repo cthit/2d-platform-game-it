@@ -2,6 +2,7 @@ import pygame
 
 from entities.character.Character import Character
 from src.LevelData import LevelData
+from src.level.Level import Level
 from tiles.base.Tile import Tile
 
 def getTilePrototypes():
@@ -14,8 +15,8 @@ def spawnTile(tile, x, y):
     return newTile
 
 def main():
-    #level = Level("Level 1")
-    #level.load()
+    level = Level("Level 1")
+    level.load()
 
     pygame.init()
     pygame.display.set_caption("2d platform game it")
@@ -60,8 +61,16 @@ def main():
         player.update(deltaTime, DATA)
         player.draw(screen)
 
-        for tile in tiles:
+        # Update
+
+        for entity in level.entities:
+            entity.update(deltaTime, DATA)
+
+        # Draw
+        for tile in level.tiles:
             tile.draw(screen)
+        for entity in level.entities:
+            entity.draw(screen)
         pygame.display.update()
 
 main()

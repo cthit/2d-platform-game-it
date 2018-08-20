@@ -32,7 +32,7 @@ def get_color_map():
         print(to_hex(key), config["Colors"][key])
 
 
-load_map("../../levels/level1/test-map.bmp")
+load_map("../../levels/level1/map.bmp")
 
 get_color_map()
 

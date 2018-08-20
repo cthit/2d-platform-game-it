@@ -1,28 +1,45 @@
 import configparser
 import importlib.util
-from numpy import *
-import os
 from pdb import set_trace
 
+import numpy as np
+
 from PIL import Image
+import os
+
+from tiles.base.Tile import Tile
 
 level_paths = {}
 level_configs = {}
 entity_map = {}
 
 
+image_file_formats = [".png", ".jpg", ".jpeg", ".bmp"]
+
+def constructor_factory(constructor, name):
+    return lambda x, y: constructor(x, y, name)
+
 def load_entity_map():
     for path in [f.path for f in os.scandir("../entities") if f.is_dir()]:
         path = [x for x in os.scandir(path) if os.path.splitext(x)[1] == ".py"][0]
         class_name = os.path.splitext(os.path.basename(path))[0]
         if ' ' in class_name:
-            raise ValueError("Entities and tiles cannot have spaces in their names, '" + class_name + "'")
+            raise ValueError("Entities cannot have spaces in their names, '" + class_name + "'")
         spec = importlib.util.spec_from_file_location("dynamic_load.entities." + class_name, path)
         foo = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(foo)
         class_constructor = getattr(foo, class_name)
-        entity_map[class_name] = class_constructor
+        entity_map[class_name] = constructor_factory(class_constructor, class_name)
 
+    for path in [f.path for f in os.scandir("../tiles") if f.is_dir()]:
+        paths = [x for x in os.scandir(path) if os.path.splitext(x)[1] in image_file_formats]
+        if len(paths) <= 0:
+            continue
+        path = paths[0]
+        class_name = os.path.splitext(os.path.basename(path))[0]
+        if ' ' in class_name:
+            raise ValueError("Tiles cannot have spaces in their names, '" + class_name + "'")
+        entity_map[class_name] = constructor_factory(Tile, class_name)
 
 load_entity_map()
 
@@ -58,7 +75,6 @@ def get_color_map(level):
     color_map = {}
     config = combine_configs(load_config(level.path + "/color-map.ini"), default_color_map)
     for key in config["Colors"]:
-        set_trace()
         color_map[hex_to_rgb(key)] = entity_map[config["Colors"][key]]
     return color_map
 
@@ -72,15 +88,20 @@ def combine_configs(c1, c2):
 
 def load_entities(level):
     entities = []
+    tiles = []
     color_map = get_color_map(level)
-    arr3d = array(Image.load(level.path + "/map.bmp"))
+    arr3d = np.array(Image.open(level.path + "/map.bmp"))
 
-    for ix, iy in np.ndindex(arr3d.shape[:1]):
+    for ix, iy in np.ndindex(arr3d.shape[:2]):
         rgb = tuple(arr3d[ix, iy])
-        entity = color_map[rgb](ix, iy, "name")
-        entities.append(entity)
+        if rgb in color_map:
+            entity = color_map[rgb](ix, iy)
+            if isinstance(entity, Tile):
+                tiles.append(entity)
+            else:
+                entities.append(entity)
 
-    return entities
+    return entities, tiles
 
 
 class Level:
@@ -93,5 +114,5 @@ class Level:
         print(self.config)
 
     def load(self):
-        self.entities = load_entities(self)
+        self.entities, self.tiles = load_entities(self)
         return

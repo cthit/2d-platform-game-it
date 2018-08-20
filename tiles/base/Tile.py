@@ -2,7 +2,6 @@ import os
 
 import pygame
 
-
 class Tile:
     """A simple tile in the gameworld"""
 
