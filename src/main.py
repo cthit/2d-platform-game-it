@@ -28,8 +28,8 @@ def main():
         tiles.append(spawnTile(tile_prototypes[0], i, (screen.get_height() - 21)))
 
 
-    DATA = LevelData(98.2)
-    lastFrameTicks = 0
+    DATA = LevelData(98.2 / 24)
+    lastFrameTicks = pygame.time.get_ticks()
 
     player = Character(200, 200, "character", 10)
 
