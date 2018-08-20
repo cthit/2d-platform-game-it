@@ -31,20 +31,35 @@ def main():
     DATA = LevelData(98.2 / 24)
     lastFrameTicks = pygame.time.get_ticks()
 
-    player = Character(200, 200, "character", 10)
+    player = Character(200, 200, "character", 1)
 
     while (running):
         screen.fill((100, 100, 100))
         for event in pygame.event.get():
+            # Check if the quit button has been pressed
             if event.type == pygame.QUIT:
                 running = False
+
+            # Move the player
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_a:
+                    player.velocity.x = -player.movementSpeed
+                if event.key == pygame.K_d:
+                    player.velocity.x = player.movementSpeed
+
 
         # Calculate deltaTime
         t = pygame.time.get_ticks()
         deltaTime = (t - lastFrameTicks) / 1000.0
         lastFrameTicks = t
+
+        # Check for keyboard inputs
+        keys = pygame.key.get_pressed()
+
+
         player.update(deltaTime, DATA)
         player.draw(screen)
+
         for tile in tiles:
             tile.draw(screen)
         pygame.display.update()

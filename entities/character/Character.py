@@ -14,3 +14,4 @@ class Character(Entity):
             self.velocity.y = (self.velocity.y + state.gravity * deltaTime)
 
         self.y = self.y + self.velocity.y
+        self.x = self.x + self.velocity.x
