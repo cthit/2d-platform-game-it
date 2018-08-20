@@ -10,7 +10,6 @@ class Character(Entity):
         self.onFloor = False
 
     def update(self, deltaTime, state):
-        print(self.velocity.y)
         if not self.onFloor:
             self.velocity.y = (self.velocity.y + state.gravity * deltaTime)
 
