@@ -18,3 +18,6 @@ class Tile:
 
     def draw(self, screen):
         screen.blit(self.sprite, (self.x, self.y))
+
+    def get_top_position(self):
+        return self.x - (self.sprite.get_rect().height / 2)
