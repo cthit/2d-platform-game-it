@@ -7,6 +7,8 @@ class Entity:
     def __init__(self, x, y, name):
         self.x = x
         self.y = y
+        self.width = 1
+        self.height = 1
         self.name = name
         path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../" + name + "/" + name + ".png")
         try:

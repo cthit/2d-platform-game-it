@@ -95,7 +95,7 @@ def load_entities(level):
     for ix, iy in np.ndindex(arr3d.shape[:2]):
         rgb = tuple(arr3d[ix, iy])
         if rgb in color_map:
-            entity = color_map[rgb](ix, iy)
+            entity = color_map[rgb](iy, ix)
             if isinstance(entity, Tile):
                 tiles.append(entity)
             else:

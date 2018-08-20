@@ -9,6 +9,9 @@ class Tile:
         self.name = name
         self.x = x
         self.y = y
+        self.width = 1
+        self.height = 1
+
         path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../" + name + "/" + name + ".png")
         try:
             self.sprite = pygame.image.load(path)
