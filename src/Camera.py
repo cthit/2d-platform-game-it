@@ -3,9 +3,13 @@ import pygame
 
 class Camera:
     def __init__(self, screen):
-        self.x = 0
-        self.y = 0
+        self.x = -40
+        self.y = -20
         self.screen = screen
+
+    def set_center(self, x, y):
+        self.x = x
+        self.y = y
 
     def set_settings(self, settings):
         self.settings = settings
