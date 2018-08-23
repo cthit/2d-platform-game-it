@@ -44,18 +44,13 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-            # Move the player
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_a:
-                    player.velocity.x = -player.movementSpeed
-                if event.key == pygame.K_d:
-                    player.velocity.x = player.movementSpeed
-
-
         # Calculate deltaTime
         t = pygame.time.get_ticks()
         deltaTime = (t - lastFrameTicks) / 1000.0
         lastFrameTicks = t
+
+        keys = pygame.key.get_pressed()
+        DATA.set_keys(keys)
 
         player.update(deltaTime, DATA)
         camera.render(player)
