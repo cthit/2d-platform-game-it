@@ -31,11 +31,6 @@ def main():
 
     running = True
     tile_prototypes = getTilePrototypes()
-    tiles = []
-    for i in range(0, screen.get_width(), 21):
-        # Spawns a floor of grass at the bottom of the screen.
-        tiles.append(spawnTile(tile_prototypes[0], i, (screen.get_height() - 21)))
-
 
     DATA = LevelData(98.2 / 24000)
     lastFrameTicks = pygame.time.get_ticks()
@@ -61,10 +56,6 @@ def main():
         t = pygame.time.get_ticks()
         deltaTime = (t - lastFrameTicks) / 1000.0
         lastFrameTicks = t
-
-        # Check for keyboard inputs
-        keys = pygame.key.get_pressed()
-
 
         player.update(deltaTime, DATA)
         camera.render(player)
