@@ -20,10 +20,11 @@ class Entity:
 
     def update(self, deltaTime, state):
         if not self.onFloor:
-            self.velocity.y = (self.velocity.y + state.gravity * deltaTime)
+            self.velocity.y = (self.velocity.y + state.gravity)
 
-        self.y = self.y + self.velocity.y
-        self.x = self.x + self.velocity.x
+        self.y = self.y + self.velocity.y * deltaTime
+        self.x = self.x + self.velocity.x * deltaTime
+        self.velocity.x = 0
 
     def draw(self, screen):
         screen.blit(self.sprite, (self.x, self.y))

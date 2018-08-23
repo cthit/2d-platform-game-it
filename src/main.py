@@ -35,8 +35,6 @@ def main():
     DATA = LevelData(98.2 / 24000)
     lastFrameTicks = pygame.time.get_ticks()
 
-    player = Character(200, 200, "character", 1)
-
     while (running):
         camera.clear()
         for event in pygame.event.get():
@@ -52,11 +50,7 @@ def main():
         keys = pygame.key.get_pressed()
         DATA.set_keys(keys)
 
-        player.update(deltaTime, DATA)
-        camera.render(player)
-
         # Update
-
         for entity in level.entities:
             entity.update(deltaTime, DATA)
 
