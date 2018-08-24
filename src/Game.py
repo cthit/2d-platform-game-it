@@ -20,6 +20,7 @@ class Game:
         pass
 
     def goal_reached(self):
+        '''method to change to next level (numberwise)'''
         curr_level = self.level.name
         level_num = ""
 
@@ -44,7 +45,6 @@ class Game:
         self.load_level("level" + str(level_num))
 
     def update(self, delta_time):
-        self.goal_reached()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.isRunning = False
@@ -53,7 +53,6 @@ class Game:
 
         for entity in self.level.entities:
             entity.update(delta_time, pressed_keys, self.level.config)
-
         pass
 
     def render(self):
