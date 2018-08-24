@@ -19,8 +19,32 @@ class Game:
         self.camera.set_settings(self.level.config["Camera"])
         pass
 
-    def update(self, delta_time):
+    def goal_reached(self):
+        curr_level = self.level.name
+        level_num = ""
 
+        if len(curr_level) <= 0:
+            print("Current level has no name?")
+            return
+
+        class BreakIt(Exception): pass
+
+        try:
+            for character in curr_level.split()[::-1]:
+                if character.isdigit():
+                    level_num += character
+                else:
+                    raise BreakIt
+        except BreakIt:
+            pass
+
+        level_num = level_num[::-1]
+        level_num = int(level_num)
+        level_num += 1
+        self.load_level("level" + str(level_num))
+
+    def update(self, delta_time):
+        self.goal_reached()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.isRunning = False
