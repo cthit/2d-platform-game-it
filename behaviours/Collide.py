@@ -133,7 +133,10 @@ class Collide(Behaviour):
         return self.get_other_colliding(x_interval, self.y_interval)
 
     def __del__(self):
-        if self.x_inteval is not None:
-            tx.remove(self.x_interval)
-        if self.y_inteval is not None:
-            ty.remove(self.y_interval)
+        try:
+            if self.x_inteval is not None:
+                tx.remove(self.x_interval)
+            if self.y_inteval is not None:
+                ty.remove(self.y_interval)
+        except AttributeError:
+            pass
