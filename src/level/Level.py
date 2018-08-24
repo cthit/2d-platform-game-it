@@ -111,6 +111,7 @@ class Level:
         print(level_paths.keys())
         self.path = level_paths[name]
         self.config = combine_configs(level_configs[name], level_configs["Default"])
+        self.name = name
         print(self.config)
 
     def load(self):
