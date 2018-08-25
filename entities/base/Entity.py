@@ -25,15 +25,6 @@ class Entity:
         except:
             print("Could not load sprite for " + name)
 
-
-    def update(self, deltaTime, state):
-        if not self.onFloor:
-            self.velocity.y = (self.velocity.y + state.gravity)
-
-        self.y = self.y + self.velocity.y * deltaTime
-        self.x = self.x + self.velocity.x * deltaTime
-        self.velocity.x = 0
-
     def set_x(self, x):
         self.x = x
         if "set_x" in self.listeners:
@@ -86,7 +77,7 @@ class Entity:
         for name, behaviour in behaviours.items():
             self.register_behaviour(behaviour)
 
-    def update(self, delta_time, keys, config):
+    def update(self, delta_time, keys, config, state):
         for name, behaviour in self.behaviours.items():
             behaviour.update(self, delta_time, keys, config)
         self.update_position(delta_time)

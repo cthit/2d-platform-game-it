@@ -1,6 +1,7 @@
 import pygame
 
 from src.Camera import Camera
+from src.LevelData import LevelData
 from src.level.Level import Level
 
 
@@ -12,6 +13,7 @@ class Game:
         self.camera = Camera(self.screen)
         self.isRunning = True
         self.level = None
+        self.state = LevelData(self.goal_reached)
 
     def load_level(self, level_name):
         self.level = Level(level_name)
@@ -52,7 +54,7 @@ class Game:
         pressed_keys = pygame.key.get_pressed()
 
         for entity in self.level.entities:
-            entity.update(delta_time, pressed_keys, self.level.config)
+            entity.update(delta_time, pressed_keys, self.level.config, self.state)
         pass
 
     def render(self):

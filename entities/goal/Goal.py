@@ -7,3 +7,17 @@ class Goal(Entity):
         super().__init__(x, y, name)
         self.register_behaviour(Collide())
         self.get_behaviour("Collide").is_trigger = True
+
+    def update(self, deltaTime, keys, config, state):
+        super().update(deltaTime, keys, config, state)
+        self.goal_reached = state.goal_reached
+
+    def trigger(self, collider):
+        if collider.name == "Player":
+            if self.goal_reached is None:
+                pass
+            else:
+                self.goal_reached()
+
+
+

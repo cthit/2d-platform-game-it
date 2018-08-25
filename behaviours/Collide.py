@@ -111,6 +111,7 @@ class Collide(Behaviour):
         try:
             for collider in colliding:
                 if collider.get_behaviour("Collide").is_trigger:
+                    collider.trigger(self.owner)
                     to_discard.append(collider)
         except AttributeError:
             pass

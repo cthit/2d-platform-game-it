@@ -12,5 +12,5 @@ class Character(Entity):
         self.register_behaviour(Fall())
         self.register_behaviour(Jump())
 
-    def update(self, delta_time, keys, config):
-        super().update(delta_time, keys, config)
+    def update(self, delta_time, keys, config, state):
+        super().update(delta_time, keys, config, state)

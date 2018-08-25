@@ -9,7 +9,7 @@ class Player(Character):
         super().__init__(x, y, name)
         self.register_behaviour(Move(self.movement_speed))
 
-    def update(self, deltaTime, keys, config):
-        super().update(deltaTime, keys, config)
+    def update(self, deltaTime, keys, config, state):
+        super().update(deltaTime, keys, config, state)
 
 
