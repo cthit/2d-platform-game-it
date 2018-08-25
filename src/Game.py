@@ -47,7 +47,7 @@ class Game:
         level_num = level_num[::-1]
         level_num = int(level_num)
         level_num += 1
-        self.load_level("level" + str(level_num))
+        self.load_level("Level " + str(level_num))
 
     def update(self, delta_time):
         for event in pygame.event.get():
