@@ -2,7 +2,7 @@ import pygame
 
 from src.Camera import Camera
 from src.LevelData import LevelData
-from src.level.Level import Level
+from src.level import Level
 
 
 class Game:
@@ -15,9 +15,9 @@ class Game:
         self.level = None
         self.state = LevelData(self.goal_reached)
 
-    def load_level(self, level_name):
+    def load_level(self, index):
         try:
-            self.level = Level(level_name)
+            self.level = Level.get_level_by_index(index)
             self.level.load()
             self.camera.set_settings(self.level.config["Camera"])
         except KeyError:
@@ -26,28 +26,10 @@ class Game:
 
     def goal_reached(self):
         '''method to change to next level (numberwise)'''
-        curr_level = self.level.name
-        level_num = ""
+        curr_level = self.level
+        new_level_num = int(self.level.config["General"]["iandex"])
+        self.load_level(new_level_num + 1)
 
-        if len(curr_level) <= 0:
-            print("Current level has no name?")
-            return
-
-        class BreakIt(Exception): pass
-
-        try:
-            for character in curr_level.split()[::-1]:
-                if character.isdigit():
-                    level_num += character
-                else:
-                    raise BreakIt
-        except BreakIt:
-            pass
-
-        level_num = level_num[::-1]
-        level_num = int(level_num)
-        level_num += 1
-        self.load_level("Level " + str(level_num))
 
     def update(self, delta_time):
         for event in pygame.event.get():

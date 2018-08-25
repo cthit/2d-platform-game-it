@@ -55,10 +55,10 @@ def load_levels():
 
 
 def get_level_by_index(index):
-    level_list = {}
-
-    for level_name in level_configs.keys:
-        if level_configs[level_name]["Index"] == index:
+    level_list = []
+    for level_name in level_configs.keys():
+        level_index = int(level_configs[level_name]["General"]["Index"])
+        if level_index == index:
             level_list.append(level_name)
 
     if len(level_list) <= 0:
