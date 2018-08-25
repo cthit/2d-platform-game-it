@@ -5,7 +5,7 @@ from src.Game import Game
 
 def main():
     game = Game()
-    game.load_level("Level 1")
+    game.load_level(1)
 
     get_delta_time = delta_time_gen().__next__
 
