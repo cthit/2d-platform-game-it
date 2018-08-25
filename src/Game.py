@@ -16,9 +16,12 @@ class Game:
         self.state = LevelData(self.goal_reached)
 
     def load_level(self, level_name):
-        self.level = Level(level_name)
-        self.level.load()
-        self.camera.set_settings(self.level.config["Camera"])
+        try:
+            self.level = Level(level_name)
+            self.level.load()
+            self.camera.set_settings(self.level.config["Camera"])
+        except KeyError:
+            pass
         pass
 
     def goal_reached(self):
