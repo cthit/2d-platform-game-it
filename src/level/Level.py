@@ -1,5 +1,6 @@
 import configparser
 import importlib.util
+import random
 from pdb import set_trace
 
 import numpy as np
@@ -52,6 +53,20 @@ def load_levels():
         level_paths[level_name] = path
         level_configs[level_name] = config
 
+
+def get_level_by_index(index):
+    level_list = {}
+
+    for level_name in level_configs.keys:
+        if level_configs[level_name]["Index"] == index:
+            level_list.append(level_name)
+
+    if len(level_list) <= 0:
+        return
+    if len(level_list) == 1:
+        return Level(level_list[0])
+
+    return random.choice(level_list)
 
 load_levels()
 
