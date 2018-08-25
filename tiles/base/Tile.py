@@ -20,7 +20,7 @@ class Tile:
         Collide.tx.add(self.interval_x)
         Collide.ty.add(self.interval_y)
 
-        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../" + name + "/" + name + ".png")
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../" + name.lower() + "/" + name + ".png")
         try:
             self.sprite = pygame.image.load(path)
         except:
