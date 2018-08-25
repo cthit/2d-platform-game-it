@@ -53,9 +53,10 @@ def get_colliding(x_interval, y_interval):
 
 
 class Collide(Behaviour):
-    def __init__(self, owner=None):
+    def __init__(self, owner=None, is_trigger = False):
         self.x_interval = None
         self.y_interval = None
+        self.is_trigger = is_trigger
         if owner is None:
             self.owner = None
             return
@@ -105,7 +106,17 @@ class Collide(Behaviour):
 
     def get_other_colliding(self, x_interval, y_interval):
         colliding = get_colliding(x_interval, y_interval)
-        colliding.discard(self.owner)
+        to_discard = [self.owner]
+        # If the collider is a trigger, ignore it.
+        try:
+            for collider in colliding:
+                if collider.get_behaviour("Collide").is_trigger:
+                    to_discard.append(collider)
+        except AttributeError:
+            pass
+        for collider in to_discard:
+            colliding.discard(collider)
+
         return colliding
 
     def check_inside(self):
