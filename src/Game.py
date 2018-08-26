@@ -27,7 +27,7 @@ class Game:
     def goal_reached(self):
         '''method to change to next level (numberwise)'''
         curr_level = self.level
-        new_level_num = int(self.level.config["General"]["iandex"])
+        new_level_num = int(self.level.config["General"]["index"])
         self.load_level(new_level_num + 1)
 
 

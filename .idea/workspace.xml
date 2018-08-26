@@ -6,10 +6,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6681d20e-3bf9-4f4b-af6e-860e74285042" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/levels/level2b/config.ini" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/levels/level2b/map.bmp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/level/Level.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/level/Level.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -81,34 +82,35 @@
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.5" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="bmp" value="2" />
-          <entry key="ini" value="8" />
+          <entry key="bmp" value="3" />
+          <entry key="ini" value="9" />
           <entry key="png" value="1" />
           <entry key="py" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Image" value="3" />
-          <entry key="PLAIN_TEXT" value="8" />
+          <entry key="Image" value="4" />
+          <entry key="PLAIN_TEXT" value="9" />
           <entry key="Python" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="ini" value="2" />
-          <entry key="py" value="2600" />
+          <entry key="ini" value="10" />
+          <entry key="py" value="2828" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Python" value="2600" />
+          <entry key="PLAIN_TEXT" value="10" />
+          <entry key="Python" value="2828" />
         </counts>
       </usages-collector>
     </session>
@@ -121,27 +123,40 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/level/Level.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="59" column="51" lean-forward="true" selection-start-line="59" selection-start-column="51" selection-end-line="59" selection-end-column="71" />
+            <state relative-caret-position="329">
+              <caret line="68" column="43" selection-start-line="68" selection-start-column="43" selection-end-line="68" selection-end-column="43" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
-                <marker date="1535237453666" expanded="true" signature="1952:2294" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Game.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="331">
+              <caret line="41" selection-start-line="41" selection-end-line="41" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+                <marker date="1535272898869" expanded="true" signature="918:924" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Game.py">
+        <entry file="file://$PROJECT_DIR$/levels/level2b/config.ini">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="29" column="59" selection-start-line="29" selection-start-column="59" selection-end-line="29" selection-end-column="59" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-                <marker date="1535237804612" expanded="true" signature="918:924" ph="..." />
-              </folding>
+            <state relative-caret-position="30">
+              <caret line="2" column="9" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/levels/level2b/map.bmp">
+          <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -154,9 +169,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="30">
               <caret line="2" selection-start-line="2" selection-end-line="2" />
-              <folding>
-                <marker date="1535205035604" expanded="true" signature="95:96" ph="..." />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -164,10 +176,9 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/entities/goal/Goal.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
+            <state relative-caret-position="270">
               <caret line="19" selection-start-line="19" selection-end-line="19" />
               <folding>
-                <element signature="e#0#39#0" expanded="true" />
                 <marker date="1535205284503" expanded="true" signature="327:435" ph="..." />
               </folding>
             </state>
@@ -239,8 +250,9 @@
         <option value="$PROJECT_DIR$/entities/goal/Goal.py" />
         <option value="$PROJECT_DIR$/levels/level2/config.ini" />
         <option value="$PROJECT_DIR$/src/main.py" />
-        <option value="$PROJECT_DIR$/src/level/Level.py" />
         <option value="$PROJECT_DIR$/src/Game.py" />
+        <option value="$PROJECT_DIR$/src/level/Level.py" />
+        <option value="$PROJECT_DIR$/levels/level2b/config.ini" />
       </list>
     </option>
   </component>
@@ -281,12 +293,6 @@
               <item name="2d-platform-game-it" type="b2602c69:ProjectViewProjectNode" />
               <item name="2d-platform-game-it" type="462c0819:PsiDirectoryNode" />
               <item name="levels" type="462c0819:PsiDirectoryNode" />
-              <item name="default" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="2d-platform-game-it" type="b2602c69:ProjectViewProjectNode" />
-              <item name="2d-platform-game-it" type="462c0819:PsiDirectoryNode" />
-              <item name="levels" type="462c0819:PsiDirectoryNode" />
               <item name="level1" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -294,6 +300,12 @@
               <item name="2d-platform-game-it" type="462c0819:PsiDirectoryNode" />
               <item name="levels" type="462c0819:PsiDirectoryNode" />
               <item name="level2" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="2d-platform-game-it" type="b2602c69:ProjectViewProjectNode" />
+              <item name="2d-platform-game-it" type="462c0819:PsiDirectoryNode" />
+              <item name="levels" type="462c0819:PsiDirectoryNode" />
+              <item name="level2b" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="2d-platform-game-it" type="b2602c69:ProjectViewProjectNode" />
@@ -325,6 +337,7 @@
       <recent name="D:\digIT\2d-platform-game-it\src" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/levels" />
       <recent name="$PROJECT_DIR$/levels/level2" />
       <recent name="D:\digIT\2d-platform-game-it\entities\player" />
     </key>
@@ -414,7 +427,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" sideWeight="0.5147541" side_tool="true" weight="0.11913548" />
-      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.4852459" visible="true" weight="0.11913548" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.4852459" visible="true" weight="0.11913548" />
       <window_info id="Structure" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Event Log" order="0" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="1" />
@@ -422,8 +435,8 @@
       <window_info anchor="bottom" id="Terminal" order="3" weight="0.32929516" />
       <window_info anchor="bottom" id="Message" order="4" />
       <window_info anchor="bottom" id="Find" order="5" weight="0.32929516" />
-      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.32819384" />
-      <window_info anchor="bottom" id="Debug" order="7" weight="0.39867842" />
+      <window_info anchor="bottom" id="Run" order="6" weight="0.32819384" />
+      <window_info anchor="bottom" id="Debug" order="7" visible="true" weight="0.39867842" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="10" />
@@ -525,9 +538,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="301">
           <caret line="38" column="28" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -542,10 +552,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="346">
           <caret line="113" column="48" selection-start-line="113" selection-start-column="48" selection-end-line="113" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-            <marker date="1535204564538" expanded="true" signature="4946:4951" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -553,9 +559,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-255">
           <caret line="25" column="54" selection-start-line="25" selection-start-column="54" selection-end-line="25" selection-end-column="54" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -563,55 +566,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="53" selection-start-line="12" selection-start-column="53" selection-end-line="12" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/entities/character/Character.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="15" column="54" selection-start-line="15" selection-start-column="54" selection-end-line="15" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/levels/level1/map.bmp">
-      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/levels/level2/map.bmp">
       <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/LevelData.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-          <folding>
-            <marker date="1535205035604" expanded="true" signature="95:96" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/level/Level.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="59" column="51" lean-forward="true" selection-start-line="59" selection-start-column="51" selection-end-line="59" selection-end-column="71" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-            <marker date="1535237453666" expanded="true" signature="1952:2294" ph="..." />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/levels/level1/config.ini">
       <provider selected="true" editor-type-id="text-editor">
@@ -634,25 +593,71 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/levels/level1/map.bmp">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LevelData.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/entities/goal/Goal.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
+        <state relative-caret-position="270">
           <caret line="19" selection-start-line="19" selection-end-line="19" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
             <marker date="1535205284503" expanded="true" signature="327:435" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/entities/character/Character.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="15" column="54" selection-start-line="15" selection-start-column="54" selection-end-line="15" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Game.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="59" selection-start-line="29" selection-start-column="59" selection-end-line="29" selection-end-column="59" />
+        <state relative-caret-position="331">
+          <caret line="41" selection-start-line="41" selection-end-line="41" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <marker date="1535237804612" expanded="true" signature="918:924" ph="..." />
+            <marker date="1535272898869" expanded="true" signature="918:924" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/levels/level2b/map.bmp">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/level/Level.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="68" column="43" selection-start-line="68" selection-start-column="43" selection-end-line="68" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/levels/level2b/config.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="9" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
         </state>
       </provider>
     </entry>

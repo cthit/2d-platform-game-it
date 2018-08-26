@@ -66,7 +66,7 @@ def get_level_by_index(index):
     if len(level_list) == 1:
         return Level(level_list[0])
 
-    return random.choice(level_list)
+    return Level(random.choice(level_list))
 
 load_levels()
 
