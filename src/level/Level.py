@@ -100,15 +100,16 @@ def combine_configs(c1, c2):
         combined[category] = {**(c2[category] if category in c2 else {}), **(c1[category] if category in c1 else {})}
     return combined
 
+def load_map_image(level):
+    arr3d = np.array(Image.open(level.path + "/map.bmp"))
+    return arr3d, arr3d.shape[:2]
 
-def load_entities(level):
+def load_entities(color_map, map_image, image_shape):
     entities = []
     tiles = []
-    color_map = get_color_map(level)
-    arr3d = np.array(Image.open(level.path + "/map.bmp"))
 
-    for ix, iy in np.ndindex(arr3d.shape[:2]):
-        rgb = tuple(arr3d[ix, iy])
+    for ix, iy in np.ndindex(image_shape):
+        rgb = tuple(map_image[ix, iy])
         if rgb in color_map:
             entity = color_map[rgb](iy, ix)
             if isinstance(entity, Tile):
@@ -130,5 +131,24 @@ class Level:
         print(self.config)
 
     def load(self):
-        self.entities, self.tiles = load_entities(self)
+        self.color_map = get_color_map(self)
+        self.map_image, self.map_shape = load_map_image(self)
+        self.entities, self.tiles = load_entities(self.color_map, self.map_image, self.map_shape)
         return
+
+    def get_entity(self, entity_name):
+        # TODO eliassu 2018-08-26: Optimize
+        for entity in self.entities:
+            if entity.name == entity_name:
+                return entity
+        raise Exception("Invalid entity!")
+
+    def get_y(self, number, unit):
+        if unit == "percent":
+            return self.map_shape[1] * number / 100
+        return number
+
+    def get_x(self, number, unit):
+        if unit == "percent":
+            return self.map_shape[0] * number / 100
+        return number

@@ -9,7 +9,7 @@ class Game:
     def __init__(self):
         pygame.init()
         pygame.display.set_caption("2d platform game it")
-        self.screen = pygame.display.set_mode((1600, 900))
+        self.screen = pygame.display.set_mode((800, 450))
         self.camera = Camera(self.screen)
         self.isRunning = True
         self.level = None
@@ -20,6 +20,7 @@ class Game:
             self.level = Level.get_level_by_index(index)
             self.level.load()
             self.camera.set_settings(self.level.config["Camera"])
+            self.camera.set_level(self.level)
         except KeyError:
             pass
         pass
@@ -29,7 +30,6 @@ class Game:
         curr_level = self.level
         new_level_num = int(self.level.config["General"]["index"])
         self.load_level(new_level_num + 1)
-
 
     def update(self, delta_time):
         for event in pygame.event.get():
