@@ -3,8 +3,8 @@ import pygame
 from src.Camera import Camera
 from src.LevelData import LevelData
 from src.gui.Gui import Gui
+from src.gui.elements.image.Image import Image
 from src.level import Level
-
 
 class Game:
     def __init__(self):
@@ -16,6 +16,8 @@ class Game:
         self.level = None
         self.state = LevelData(self.goal_reached)
         self.gui = Gui()
+        image = Image(50, 50)
+        self.gui.add_gui_element(image)
 
     def load_level(self, index):
         try:

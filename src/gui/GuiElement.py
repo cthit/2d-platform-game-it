@@ -1,10 +1,24 @@
+import os
+
+import pygame
+
+
 class GuiElement:
-    def __init__(self, pos_x, pos_y, width, height, image = None):
+    def __init__(self, pos_x, pos_y, width=0, height=0, image=None):
         self.x = pos_x
         self.y = pos_y
         self.width = width
         self.height = height
         self.image = image
+
+        if image is None:
+            path = os.path.dirname(os.path.realpath(__file__)) + "/elements/" + self.__class__.__name__ + "/" + self.__class__.__name__ + ".png"
+            print(path)
+            try:
+                self.image = pygame.image.load(path)
+            except:
+                pass
+
 
     def contains(self, x, y):
         if x <= self.x + self.width and x >= self.x and y <= self.y + self.height and y >= self.y:
@@ -21,4 +35,5 @@ class GuiElement:
         pass
 
     def draw(self, surface):
-        surface.blit(self.image, (x, y))
+        if self.image:
+            surface.blit(self.image, (self.x, self.y))
