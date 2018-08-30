@@ -9,7 +9,7 @@ class Gui:
     def update(self, mouse, events):
         curr_element = None
         for element in self.gui_elements:
-            if element.contains(mouse.get_pos):
+            if element.contains(mouse.get_pos()[0], mouse.get_pos()[1]):
                 curr_element = element
                 element.on_hover()
 
