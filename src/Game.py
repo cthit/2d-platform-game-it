@@ -2,6 +2,7 @@ import pygame
 
 from src.Camera import Camera
 from src.LevelData import LevelData
+from src.gui.Gui import Gui
 from src.level import Level
 
 
@@ -14,6 +15,7 @@ class Game:
         self.isRunning = True
         self.level = None
         self.state = LevelData(self.goal_reached)
+        self.gui = Gui()
 
     def load_level(self, index):
         try:
@@ -32,15 +34,19 @@ class Game:
         self.load_level(new_level_num + 1)
 
     def update(self, delta_time):
-        for event in pygame.event.get():
+        events = pygame.event.get()
+
+        for event in events:
             if event.type == pygame.QUIT:
                 self.isRunning = False
+        self.gui.update(pygame.mouse, events)
 
         pressed_keys = pygame.key.get_pressed()
 
         for entity in self.level.entities:
             entity.update(delta_time, pressed_keys, self.level.config, self.state)
         pass
+
 
     def render(self):
         self.camera.clear()
