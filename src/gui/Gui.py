@@ -26,3 +26,7 @@ class Gui:
 
     def add_gui_element(self, gui_element):
         self.gui_elements.append(gui_element)
+
+    def draw(self, screen):
+        for element in self.gui_elements:
+            element.draw(screen)

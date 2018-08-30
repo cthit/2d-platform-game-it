@@ -54,4 +54,6 @@ class Game:
             self.camera.render(tile)
         for entity in self.level.entities:
             self.camera.render(entity)
+
+        self.gui.draw(self, self.screen)
         pygame.display.update()
