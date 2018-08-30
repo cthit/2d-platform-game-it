@@ -23,3 +23,6 @@ class Gui:
                     curr_element.on_mouse_up()
 
         curr_element = None
+
+    def add_gui_element(self, gui_element):
+        self.gui_elements.append(gui_element)
