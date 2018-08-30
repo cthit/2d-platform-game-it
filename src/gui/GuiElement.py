@@ -21,7 +21,7 @@ class GuiElement:
 
 
     def contains(self, x, y):
-        if x <= self.x + self.width and x >= self.x and y <= self.y + self.height and y >= self.y:
+        if self.image and self.image.get_rect().collidepoint((x-self.x, y-self.y)):
             return True
         return False
 

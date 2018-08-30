@@ -2,6 +2,7 @@ import configparser
 import importlib.util
 import random
 from pdb import set_trace
+from warnings import warn
 
 import numpy as np
 
@@ -14,11 +15,12 @@ level_paths = {}
 level_configs = {}
 entity_map = {}
 
-
 image_file_formats = [".png", ".jpg", ".jpeg", ".bmp"]
+
 
 def constructor_factory(constructor, name):
     return lambda x, y: constructor(x, y, name)
+
 
 def load_entity_map():
     for path in [f.path for f in os.scandir("../entities") if f.is_dir()]:
@@ -68,6 +70,7 @@ def get_level_by_index(index):
 
     return Level(random.choice(level_list))
 
+
 load_levels()
 
 
@@ -100,9 +103,11 @@ def combine_configs(c1, c2):
         combined[category] = {**(c2[category] if category in c2 else {}), **(c1[category] if category in c1 else {})}
     return combined
 
+
 def load_map_image(level):
     arr3d = np.array(Image.open(level.path + "/map.bmp"))
     return arr3d, arr3d.shape[:2]
+
 
 def load_entities(color_map, map_image, image_shape):
     entities = []
@@ -124,16 +129,25 @@ class Level:
     def __init__(self, name):
         if name == "Default":
             raise ValueError("Do not instantiate the default level")
-        print(level_paths.keys())
         self.path = level_paths[name]
         self.config = combine_configs(level_configs[name], level_configs["Default"])
         self.name = name
-        print(self.config)
+        self.entities = list()
+        self.tiles = list()
+        self.color_map = {}
+        self.map_image = None
+        self.map_shape = (0, 0)
 
     def load(self):
+        try:
+            if self.config["General"]["type"] == "Pure GUI":
+                return
+        except KeyError:
+            pass
         self.color_map = get_color_map(self)
         self.map_image, self.map_shape = load_map_image(self)
         self.entities, self.tiles = load_entities(self.color_map, self.map_image, self.map_shape)
+
         return
 
     def get_entity(self, entity_name):
