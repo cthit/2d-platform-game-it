@@ -55,5 +55,5 @@ class Game:
         for entity in self.level.entities:
             self.camera.render(entity)
 
-        self.gui.draw(self, self.screen)
+        self.gui.draw(self.screen)
         pygame.display.update()
