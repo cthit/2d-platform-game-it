@@ -101,8 +101,11 @@ def combine_configs(c1, c2):
     return combined
 
 def load_map_image(level):
-    arr3d = np.array(Image.open(level.path + "/map.bmp"))
+    arr3d = np.array(get_map_image(level))
     return arr3d, arr3d.shape[:2]
+
+def get_map_image(level):
+    return Image.open(level.path + "/map.bmp")
 
 def load_entities(color_map, map_image, image_shape):
     entities = []

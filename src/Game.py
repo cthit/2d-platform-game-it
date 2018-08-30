@@ -2,6 +2,7 @@ import pygame
 
 from src.Camera import Camera
 from src.LevelData import LevelData
+from src.Map import Map
 from src.level import Level
 
 
@@ -21,6 +22,7 @@ class Game:
             self.level.load()
             self.camera.set_settings(self.level.config["Camera"])
             self.camera.set_level(self.level)
+            self.map = Map(self.level)
         except KeyError:
             pass
         pass
@@ -35,6 +37,13 @@ class Game:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.isRunning = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_m:
+                    self.map.toggle()
+
+        # We don't want to do anything until the player closes the map
+        if self.map.open:
+            return
 
         pressed_keys = pygame.key.get_pressed()
 
@@ -48,4 +57,5 @@ class Game:
             self.camera.render(tile)
         for entity in self.level.entities:
             self.camera.render(entity)
+        self.map.draw(self.screen)
         pygame.display.update()
