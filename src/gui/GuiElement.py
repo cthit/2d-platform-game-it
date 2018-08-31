@@ -13,7 +13,6 @@ class GuiElement:
 
         if image is None:
             path = os.path.dirname(os.path.realpath(__file__)) + "/elements/" + self.__class__.__name__ + "/" + self.__class__.__name__ + ".png"
-            print(path)
             try:
                 self.image = pygame.image.load(path)
             except:
@@ -35,5 +34,5 @@ class GuiElement:
         pass
 
     def draw(self, surface):
-        if self.image:
+        if self.image is not None:
             surface.blit(self.image, (self.x, self.y))
