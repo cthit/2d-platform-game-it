@@ -22,8 +22,6 @@ class Game:
         self.level = None
         self.state = LevelData(self.load_next_level)
         self.gui = Gui()
-        image = Image(50, 50)
-        self.gui.add_gui_element(image)
 
     def load_level(self, index):
         try:

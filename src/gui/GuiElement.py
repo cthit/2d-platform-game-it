@@ -12,9 +12,12 @@ class GuiElement:
         self.image = image
 
         if image is None:
-            path = os.path.dirname(os.path.realpath(__file__)) + "/elements/" + self.__class__.__name__ + "/" + self.__class__.__name__ + ".png"
+            path = os.path.dirname(os.path.realpath(__file__)) + "/elements/" + self.__class__.__name__.lower() + "/" + self.__class__.__name__ + ".png"
             try:
                 self.image = pygame.image.load(path)
+                if self.width == 0 and self.height == height:
+                    self.width = self.image.get_rect().width
+                    self.height = self.image.get_rect().height
             except:
                 pass
 
