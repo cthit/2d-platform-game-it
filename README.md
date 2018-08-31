@@ -28,7 +28,16 @@ The purpose of the project is to be easily modifiable both for people with and w
 To create a new level for the game you simply have to do the following steps:
 1. Create a folder with a name of your choosing in the levels folder.
 2. Create an .bmp image named map.bmp which will be your level. The game will later spawn entities and tiles according to the pixel values of the image.
-3. Add a config.ini file in the folder containing at least a General tab with a Name and a Index property, (look at an example below)
+3. Add a [config.ini](#config-details) file in the folder containing at least a General tab with a Name and a Index property.
+4. (optional!) You can also add a color-map.ini file if you want to use custom entities or tiles in your level. This file needs to contain a [Colors] tag and then a property with the hex value of the color you want to assign to the tile/entity which maps to the tile/entity class name you want.
+ex:
+```
+[Colors]
+FF0000 = Player
+```
+
+#### Config details
+
 ```
 [General]
 Name = Grass Level
@@ -64,11 +73,19 @@ Mode = Tile
 ; Y-span
 ; Target = Player
 ```
+
 Gravity is the downwards acceleration present in the level (default 9.82) can be negative!
 
-
-
 ### Creating new tiles
+
+Creating new tiles is probably the easiest modification you can do to the game altough a custom level is probably required to use the new tiles.
+
+To create a new tile you simply have to create a new folder with the name of the tile (in lowercase letters only) and then put an image with the name of the tile in that folder. If you want to add new functionality to the tile you can also put a python script with the name of the tile as a name. In that python file create a class with the name of the tile and make sure it inherits from the tiles/base/Tile.py Tile class in some way (either directly or through other tile classes). Also make sure the constructor looks like this:
+```
+def __init__(self, x, y, name):
+    super.__init__(x, y, name)
+    ...
+```
 
 ---
 
