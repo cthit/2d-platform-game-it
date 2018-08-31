@@ -13,6 +13,7 @@ The purpose of the project is to be easily modifiable both for people with and w
     - [Creating new tiles](#creating-new-tiles)
 3. [Intermediate Modifications](#intermediate-modifications)
     - [Creating new entities](#creating-new-entities)
+    - [Creating new behaviors](#creating-new-behaviors)
     - [Changing the UI](#changing-the-ui)
 4. [Advanced Modifications](#advanced-modifications)
 
@@ -146,15 +147,6 @@ example for tile named Stone:
         └── Stone.png
 ```
 
-(What follows is not yet implemented!)
-If you want to add new functionality to the tile you can also put a python script with the name of the tile as a name. In that python file create a class with the name of the tile and make sure it inherits from the tiles/base/Tile.py Tile class in some way (either directly or through other tile classes). Also make sure the constructor looks like this:
-
-```
-def __init__(self, x, y, name):
-    super().__init__(x, y, name)
-    ...
-```
-
 ---
 
 ## Intermediate Modifications
@@ -180,6 +172,8 @@ class Enemy(Character):
         super().__init__(x, y, name)
         ...
 ```
+
+### Creating new Behaviors
 
 ### Changing the UI
 
