@@ -5,6 +5,7 @@ from intervaltree import Interval
 
 from behaviours import Collide
 
+sprite_map = {}
 
 class Tile:
     """A simple tile in the gameworld"""
@@ -19,12 +20,15 @@ class Tile:
         self.interval_y = Interval(self.y, self.y + 1, self)
         Collide.tx.add(self.interval_x)
         Collide.ty.add(self.interval_y)
-
-        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../" + name.lower() + "/" + name + ".png")
-        try:
-            self.sprite = pygame.image.load(path)
-        except:
-            print("Could not load sprite for " + name)
+        if name in sprite_map:
+            self.sprite = sprite_map[name]
+        else:
+            path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../" + name.lower() + "/" + name + ".png")
+            try:
+                self.sprite = pygame.image.load(path)
+                sprite_map[name] = self.sprite
+            except:
+                print("Could not load sprite for " + name)
 
     def draw(self, screen):
         screen.blit(self.sprite, (self.x, self.y))
