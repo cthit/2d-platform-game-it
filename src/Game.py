@@ -54,7 +54,10 @@ class Game:
     def load_next_level(self):
         '''method to change to next level (numberwise)'''
         curr_level = self.level
-        new_level_num = int(self.level.config["General"]["index"])
+        self.load_level(-3)
+        self.render()
+        new_level_num = int(curr_level.config["General"]["index"])
+
         try:
             self.load_level(new_level_num + 1)
         except NoLevelFoundException:
