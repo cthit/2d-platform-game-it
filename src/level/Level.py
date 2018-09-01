@@ -166,3 +166,14 @@ class Level:
         if unit == "percent":
             return self.map_shape[0] * number / 100
         return number
+
+    def clear(self):
+        for tile in self.tiles:
+            tile.clear()
+        self.tiles.clear()
+        for entity in self.entities:
+            entity.clear()
+        self.entities.clear()
+
+    def __del__(self):
+        self.clear()

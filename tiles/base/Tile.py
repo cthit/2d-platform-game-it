@@ -51,6 +51,9 @@ class Tile:
     def get_right(self):
         return self.x + self.width
 
-    def __del__(self):
+    def clear(self):
         Collide.tx.discard(self.interval_x)
         Collide.ty.discard(self.interval_y)
+
+    def __del__(self):
+        self.clear()

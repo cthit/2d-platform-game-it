@@ -155,3 +155,11 @@ class Entity:
 
     def get_right(self):
         return self.x + self.width
+
+    def clear(self):
+        c = self.get_behaviour(Collide.Collide)
+        if c is not None:
+            c.clear()
+
+    def __del__(self):
+        self.clear()
