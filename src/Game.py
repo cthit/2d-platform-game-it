@@ -20,7 +20,7 @@ class Game:
         self.camera = Camera(self.screen)
         self.isRunning = True
         self.level = None
-        self.state = LevelData(self.load_next_level)
+        self.state = LevelData(self.load_next_level, self.respawn_player, None)
         self.gui = Gui()
 
     def load_level(self, index):
@@ -37,9 +37,14 @@ class Game:
                 pass
             self.camera.set_settings(self.level.config["Camera"])
             self.camera.set_level(self.level)
+            self.state.level_size = self.level.map_shape
         except KeyError:
             pass
         return True
+
+    def respawn_player(self):
+        print("Add code to respawn the player.")
+        pass
 
     def load_next_level(self):
         '''method to change to next level (numberwise)'''

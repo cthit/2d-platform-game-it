@@ -12,4 +12,8 @@ class Player(Character):
     def update(self, deltaTime, keys, config, state):
         super().update(deltaTime, keys, config, state)
 
+        if state.respawn_player is None:
+            pass
 
+        if self.y < -5 or self.y > state.level_size[1] + 5:
+            state.respawn_player()
