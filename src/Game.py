@@ -4,6 +4,7 @@ from src.Camera import Camera
 from src.LevelData import LevelData
 from src.gui.Gui import Gui
 from src.gui.elements.image.Image import Image
+from src.gui.elements.text.TextBlock import TextBlock
 from src.level import Level
 
 
@@ -38,6 +39,8 @@ class Game:
             self.camera.set_settings(self.level.config["Camera"])
             self.camera.set_level(self.level)
             self.state.level_size = self.level.map_shape
+            self.fps_counter = TextBlock("Fps: ", 20, 20)
+            self.gui.add_gui_element(self.fps_counter)
         except KeyError:
             pass
         return True
@@ -56,6 +59,11 @@ class Game:
             self.load_level(-2)
 
     def update(self, delta_time):
+        try:
+            fps = int(1.0 / delta_time)
+            self.fps_counter.update_text("Fps: " + str(fps))
+        except:
+            pass
         events = pygame.event.get()
 
         for event in events:

@@ -10,7 +10,11 @@ class TextBlock(GuiElement):
         self.font = font
         self.text = text
         self.color = color
-        self.text_surface = font.render(text, True, color)
+        self.update_text(text)
 
     def draw(self, surface):
         surface.blit(self.text_surface, (self.x, self.y))
+
+    def update_text(self, text):
+        self.text = text
+        self.text_surface = self.font.render(text, True, self.color)
