@@ -41,6 +41,8 @@ class Game:
             self.state.level_size = self.level.map_shape
             self.fps_counter = TextBlock("Fps: ", 20, 20)
             self.gui.add_gui_element(self.fps_counter)
+            self.time = 0
+            self.frame_count = 0
         except KeyError:
             pass
         return True
@@ -59,11 +61,18 @@ class Game:
             self.load_level(-2)
 
     def update(self, delta_time):
-        try:
-            fps = int(1.0 / delta_time)
-            self.fps_counter.update_text("Fps: " + str(fps))
-        except:
-            pass
+        self.time += delta_time
+        self.frame_count += 1
+
+        if self.time >= 0.05:
+            try:
+                fps = int(self.frame_count / self.time)
+                self.fps_counter.update_text("Fps: " + str(fps))
+            except:
+                pass
+            self.time = 0
+            self.frame_count = 0
+
         events = pygame.event.get()
 
         for event in events:
