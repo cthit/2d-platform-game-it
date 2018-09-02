@@ -248,7 +248,23 @@ The entity class also has the following methods:
 
 ###### Entities and Behaviours
 
-Some of these methods are used for adding and getting behaviours 
+Some of these methods are used for adding and getting behaviours so for easy referens, to add a new Behaviour to the entity use the `register_behaviour(self, behaviour)` or `register_behaviours(self, behaviours)` methods (generally called from the constructor, \__init\__). For example, to add the fall behaviour to an entity:
+
+```
+from behaviours.Fall import Fall
+
+...
+
+def __init__(self, x, y, name):
+   self.register_behaviour(Fall())
+```
+
+If you later want to change something to the behaviour you can access it you can use the ```get_behaviour(self, behaviour_name)``` method. For example to change weather an entity with the collide behaviour is a trigger (get's the collision events but otherwise acts like a ghost) you can do like this:
+
+```
+...
+   self.get_behaviour("Collide").is_trigger = True
+```
 
 ### Creating new Behaviours
 
@@ -257,7 +273,7 @@ To create a new behaviour you simply need to create a python file in the behavio
  - `set_owner(self, new_owner, delta_time, keys, config)` which sets the owner of the behaviour to the `new_owner`.
  - `update(self, delta_time, keys, config)` which by default is called by the base entity class update method once every frame.
 
-You can read more about how to use behaviours with entities [here](#entities-and-behaviours)
+You can read more about how to use behaviours with entities [here](#entities-and-behaviours).
 
 ### Changing the UI
 
