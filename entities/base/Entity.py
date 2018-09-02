@@ -9,6 +9,7 @@ from behaviours import Collide
 class Entity:
 
     def __init__(self, x, y, name):
+        self.deletion_pending = False
         self.x = x  # do not modify directly, use self.set_x
         self.y = y  # do not modify directly, use self.set_y
         self.width = 1  # do not modify directly, use self.set_width
@@ -82,6 +83,8 @@ class Entity:
         for name, behaviour in self.behaviours.items():
             behaviour.update(self, delta_time, keys, config)
         self.update_position(delta_time)
+        if self.deletion_pending:
+            self.clear()
 
     def update_position(self, delta_time):
         dx = delta_time * self.velocity.x
@@ -158,6 +161,7 @@ class Entity:
         return self.x + self.width
 
     def clear(self):
+        self.deletion_pending = True
         c = self.get_behaviour(Collide.Collide)
         if c is not None:
             c.clear()

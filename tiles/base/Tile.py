@@ -1,7 +1,6 @@
 import os
 
 import pygame
-from intervaltree import Interval
 
 from behaviours import Collide
 
@@ -16,10 +15,9 @@ class Tile:
         self.y = y
         self.width = 1
         self.height = 1
-        self.interval_x = Interval(self.x, self.x + 1, self)
-        self.interval_y = Interval(self.y, self.y + 1, self)
-        Collide.tx.add(self.interval_x)
-        Collide.ty.add(self.interval_y)
+        self.interval_x = (self.x, self.x + 1)
+        self.interval_y = (self.y, self.y + 1)
+        Collide.quad_tree.insert(self, self.interval_x, self.interval_y)
         if name in sprite_map:
             self.sprite = sprite_map[name]
         else:
@@ -52,8 +50,7 @@ class Tile:
         return self.x + self.width
 
     def clear(self):
-        Collide.tx.discard(self.interval_x)
-        Collide.ty.discard(self.interval_y)
+        Collide.quad_tree.remove(self)
 
     def __del__(self):
         self.clear()

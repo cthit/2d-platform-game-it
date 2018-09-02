@@ -5,6 +5,7 @@ from src.LevelData import LevelData
 from src.gui.Gui import Gui
 from src.gui.elements.text.TextBlock import TextBlock
 from src.level import Level
+from behaviours import Collide
 
 
 class NoLevelFoundException(ValueError):
@@ -25,6 +26,8 @@ class Game:
 
     def load_level(self, index):
         try:
+            if self.level is not None:
+                self.level.clear()
             self.level = Level.get_level_by_index(index)
             if self.level is None:
                 raise NoLevelFoundException

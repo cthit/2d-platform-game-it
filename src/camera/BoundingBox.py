@@ -17,4 +17,4 @@ class BoundingBox:
         y_min, y_max = self.y_interval
         y_min -= padding
         y_max += padding
-        return Collide.get_colliding(Interval(x_min, x_max), Interval(y_min, y_max))
+        return Collide.get_colliding((x_min, x_max), (y_min, y_max))

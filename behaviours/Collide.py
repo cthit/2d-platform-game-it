@@ -1,23 +1,8 @@
-from typing import Set
-
-from intervaltree import Interval, IntervalTree
+from src.utils.QuadTree import Index as QuadTree
 
 from behaviours.Behaviour import Behaviour
 
-tx = IntervalTree()
-ty = IntervalTree()
-
-
-def get_overlapping_x_data(x_interval):
-    if x_interval is None:
-        return None
-    return set([i.data for i in tx[x_interval.begin:x_interval.end]])
-
-
-def get_overlapping_y_data(y_interval):
-    if y_interval is None:
-        return None
-    return set([i.data for i in ty[y_interval.begin:y_interval.end]])
+quad_tree = QuadTree((-1000, 4000), (-1000, 4000))
 
 
 def get_top_most_of(collection, default=None):
@@ -47,9 +32,12 @@ def get_right_most_of(collection, default=None):
 def get_colliding(x_interval, y_interval):
     if x_interval is None or y_interval is None:
         return None
-    x_overlaps = get_overlapping_x_data(x_interval)
-    y_overlaps = get_overlapping_y_data(y_interval)
-    return x_overlaps.intersection(y_overlaps)
+    epsilon = 1e-10
+    x_min, x_max = x_interval
+    y_min, y_max = y_interval
+    x_interval = (x_min + epsilon, x_max - epsilon)
+    y_interval = (y_min + epsilon, y_max - epsilon)
+    return quad_tree.intersect(x_interval, y_interval)
 
 
 class Collide(Behaviour):
@@ -82,21 +70,21 @@ class Collide(Behaviour):
 
     def update_x_interval(self):
         owner = self.owner
-        tx.discard(self.x_interval)
         if owner is None:
             self.x_interval = None
         else:
-            self.x_interval = Interval(owner.get_left(), owner.get_right(), owner)
-        tx.add(self.x_interval)
+            self.x_interval = (owner.get_left(), owner.get_right())
+            if self.y_interval is not None:
+                quad_tree.update_intervals(owner, self.x_interval, self.y_interval)
 
     def update_y_interval(self):
         owner = self.owner
-        ty.discard(self.y_interval)
         if owner is None:
             self.y_interval = None
         else:
-            self.y_interval = Interval(owner.get_top(), owner.get_bottom(), owner)
-        ty.add(self.y_interval)
+            self.y_interval = (owner.get_top(), owner.get_bottom())
+            if self.x_interval is not None:
+                quad_tree.update_intervals(owner, self.x_interval, self.y_interval)
 
     # The collision behaviour is only intended to add functionality
     # that can be utilized by other behaviours of an entity.
@@ -121,37 +109,30 @@ class Collide(Behaviour):
         return colliding
 
     def check_inside(self):
-        owner = self.owner
         return self.get_other_colliding(self.x_interval, self.y_interval)
 
     def check_bottom(self, distance=1):
         owner = self.owner
-        y_interval = Interval(owner.get_bottom(), owner.get_bottom() + distance)
+        y_interval = (owner.get_bottom(), owner.get_bottom() + distance)
         return self.get_other_colliding(self.x_interval, y_interval)
 
     def check_top(self, distance=1):
         owner = self.owner
-        y_interval = Interval(owner.get_top() - distance, owner.get_top())
+        y_interval = (owner.get_top() - distance, owner.get_top())
         return self.get_other_colliding(self.x_interval, y_interval)
 
     def check_left(self, distance=1):
         owner = self.owner
-        x_interval = Interval(owner.get_left() - distance, owner.get_left())
+        x_interval = (owner.get_left() - distance, owner.get_left())
         return self.get_other_colliding(x_interval, self.y_interval)
 
     def check_right(self, distance=1):
         owner = self.owner
-        x_interval = Interval(owner.get_right(), owner.get_right() + distance)
+        x_interval = (owner.get_right(), owner.get_right() + distance)
         return self.get_other_colliding(x_interval, self.y_interval)
 
     def clear(self):
-        try:
-            if self.x_interval is not None:
-                tx.discard(self.x_interval)
-            if self.y_interval is not None:
-                ty.discard(self.y_interval)
-        except AttributeError:
-            pass
+        quad_tree.remove(self.owner)
 
     def __del__(self):
         self.clear()
