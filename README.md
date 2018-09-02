@@ -241,9 +241,23 @@ The entity class also has the following methods:
 - `move_left_to(self, x)` sets the x position of the entity such that the leftmost position of the entity is at the `x` position (default same as the x position).
 - `get_left(self)` get the leftmost position of the entity (default the x position).
 - `move_horizontal_center_to(self, x)` sets the x position such that the center of the entity is at the `x` position.
-- `move_right_to`
+- `move_right_to(self, x)` sets the x position such that the rightmost part of the entity is at the `x` position.
+- `get_right(self)` get the rightmost x position of the entity.
+- `clear(self)` ... ? ... 
+- `__del__(self)` ... ? ... 
+
+###### Entities and Behaviours
+
+Some of these methods are used for adding and getting behaviours 
 
 ### Creating new Behaviours
+
+To create a new behaviour you simply need to create a python file in the behaviours folder and make inherit from the behaviour class either directly or through another class. The behaviour class constructor takes an optional `owner` parameter which can be used to set the owner of the behaviour at initialization. The Behaviour class also has the following methods:
+
+ - `set_owner(self, new_owner, delta_time, keys, config)` which sets the owner of the behaviour to the `new_owner`.
+ - `update(self, delta_time, keys, config)` which by default is called by the base entity class update method once every frame.
+
+You can read more about how to use behaviours with entities [here](#entities-and-behaviours)
 
 ### Changing the UI
 
