@@ -38,7 +38,7 @@ def get_left_most_of(collection, default=None):
     return min(collection, key=lambda i: i.get_left())
 
 
-def get_right_most_of(collection,default=None):
+def get_right_most_of(collection, default=None):
     if collection is None or len(collection) <= 0:
         return default
     return max(collection, key=lambda i: i.get_right())
@@ -53,7 +53,7 @@ def get_colliding(x_interval, y_interval):
 
 
 class Collide(Behaviour):
-    def __init__(self, owner=None, is_trigger = False):
+    def __init__(self, owner=None, is_trigger=False):
         self.x_interval = None
         self.y_interval = None
         self.is_trigger = is_trigger
@@ -67,7 +67,7 @@ class Collide(Behaviour):
         if new_owner is None:
             return
         owner = self.owner
-        if not owner is None:
+        if owner is not None:
             owner.remove_listener("set_x", self.update_x_interval)
             owner.remove_listener("set_width", self.update_x_interval)
             owner.remove_listener("set_y", self.update_y_interval)
@@ -146,10 +146,10 @@ class Collide(Behaviour):
 
     def clear(self):
         try:
-            if self.x_inteval is not None:
-                tx.remove(self.x_interval)
-            if self.y_inteval is not None:
-                ty.remove(self.y_interval)
+            if self.x_interval is not None:
+                tx.discard(self.x_interval)
+            if self.y_interval is not None:
+                ty.discard(self.y_interval)
         except AttributeError:
             pass
 

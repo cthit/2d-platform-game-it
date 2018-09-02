@@ -19,6 +19,7 @@ class Entity:
         self.name = name
         self.velocity = pygame.math.Vector2(0, 0)
         self.onFloor = False
+        self.register_behaviour(Collide.Collide())
         path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../" + name.lower() + "/" + name + ".png")
         try:
             self.sprite = pygame.image.load(path)

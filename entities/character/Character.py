@@ -8,7 +8,6 @@ class Character(Entity):
     def __init__(self, x, y, name):
         Entity.__init__(self, x, y, name)
         self.movement_speed = 7
-        self.register_behaviour(Collide())
         self.register_behaviour(Fall())
         self.register_behaviour(Jump())
 

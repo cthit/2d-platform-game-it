@@ -1,9 +1,8 @@
 import pygame
 
-from src.Camera import Camera
+from src.camera.Camera import Camera
 from src.LevelData import LevelData
 from src.gui.Gui import Gui
-from src.gui.elements.image.Image import Image
 from src.gui.elements.text.TextBlock import TextBlock
 from src.level import Level
 
@@ -91,10 +90,9 @@ class Game:
 
     def render(self):
         self.camera.clear()
-        for tile in self.level.tiles:
-            self.camera.render(tile)
-        for entity in self.level.entities:
-            self.camera.render(entity)
+        bounding_box = self.camera.get_bounding_box()
+        for renderable in bounding_box.get_visible():
+            self.camera.render(renderable, bounding_box)
 
         self.gui.draw(self.screen)
         pygame.display.update()
