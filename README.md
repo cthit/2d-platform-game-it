@@ -200,7 +200,7 @@ The python file needs to contain a class with the name of the entity and it need
 
 example for an enemy class:
 
-```
+```python
 from entities.character.Character import Character
 
 class Enemy(Character):
@@ -211,7 +211,7 @@ class Enemy(Character):
 
 Entity also have some default methods that can be overriden to add new features to the game most nobable of these is the update method which is called once every frame and looks like this:
 
-```
+```python
 def update(self, delta_time, keys, config, state):
     ...
 ```
@@ -243,14 +243,14 @@ The entity class also has the following methods:
 - `move_horizontal_center_to(self, x)` sets the x position such that the center of the entity is at the `x` position.
 - `move_right_to(self, x)` sets the x position such that the rightmost part of the entity is at the `x` position.
 - `get_right(self)` get the rightmost x position of the entity.
-- `clear(self)` ... ? ... 
-- `__del__(self)` ... ? ... 
+- `clear(self)` Removes the entity from the game
+- `__del__(self)` Same as `clear(self)`, called automatically when all references to the object are gone.
 
 ##### Entities and Behaviours
 
 Some of these methods are used for adding and getting behaviours so for easy referens, to add a new Behaviour to the entity use the `register_behaviour(self, behaviour)` or `register_behaviours(self, behaviours)` methods (generally called from the constructor, \__init\__). For example, to add the fall behaviour to an entity:
 
-```
+```python
 from behaviours.Fall import Fall
 
 ...
@@ -261,7 +261,7 @@ def __init__(self, x, y, name):
 
 If you later want to change something to the behaviour you can access it you can use the ```get_behaviour(self, behaviour_name)``` method. For example to change weather an entity with the collide behaviour is a trigger (get's the collision events but otherwise acts like a ghost) you can do like this:
 
-```
+```python
 ...
    self.get_behaviour("Collide").is_trigger = True
 ```
