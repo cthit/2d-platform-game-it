@@ -4,6 +4,7 @@ from pdb import set_trace
 import pygame
 
 from behaviours import Collide
+from src.utils.ClassGetter import get_class_that_defined_method
 
 
 class Entity:
@@ -15,7 +16,7 @@ class Entity:
         self.width = 1  # do not modify directly, use self.set_width
         self.height = 1  # do not modify directly, use self.set_height
         self.velocity = pygame.math.Vector2(0, 0)
-        self.behaviours = { }
+        self.behaviours = {}
         self.listeners = {}
         self.name = name
         self.velocity = pygame.math.Vector2(0, 0)
@@ -29,38 +30,39 @@ class Entity:
 
     def set_x(self, x):
         self.x = x
-        if "set_x" in self.listeners:
-            for listener in self.listeners["set_x"]:
-                listener[1]()
 
     def set_y(self, y):
         self.y = y
-        if "set_y" in self.listeners:
-            for listener in self.listeners["set_y"]:
-                listener[1]()
 
     def set_width(self, width):
         self.width = width
-        if "set_width" in self.listeners:
-            for listener in self.listeners["set_width"]:
-                listener[1]()
 
     def set_height(self, height):
         self.height = height
-        if "set_height" in self.listeners:
-            for listener in self.listeners["set_height"]:
-                listener[1]()
-
 
     def add_listener(self, func_name, callback):
-        if func_name in self.listeners:
-            self.listeners[func_name].append((func_name, callback))
+        func = getattr(self, func_name)
+        if func.__name__ != "patched_func":
+            cls = get_class_that_defined_method(func)
+            name = func.__name__
+            cls_func = getattr(cls, name)
+
+            def patched_func(self, *args, **kwargs):
+                cls_func(self, *args, **kwargs)
+                if func_name in self.listeners:
+                    for listener in self.listeners[func_name]:
+                        listener()
+
+            setattr(cls, name, patched_func)
+            func = getattr(cls, name)
+        if func in self.listeners:
+            self.listeners[func_name].append(callback)
         else:
-            self.listeners[func_name] = [(func_name, callback)]
+            self.listeners[func_name] = [callback]
 
     def remove_listener(self, func_name, callback):
-        if func_name in self.listeners and (func_name, callback) in self.listeners[func_name]:
-            self.listeners[func_name].remove((func_name, callback))
+        if func_name in self.listeners and callback in self.listeners[func_name]:
+            self.listeners[func_name].remove(callback)
         return
 
     def get_behaviour(self, behaviour_name):
