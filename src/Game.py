@@ -94,6 +94,7 @@ class Game:
     def render(self):
         self.camera.clear()
         bounding_box = self.camera.get_bounding_box()
+        self.camera.render_background(self.level.background, bounding_box)
         for renderable in bounding_box.get_visible():
             self.camera.render(renderable, bounding_box)
 

@@ -5,6 +5,7 @@ from pdb import set_trace
 from warnings import warn
 
 import numpy as np
+import pygame
 
 from PIL import Image
 import os
@@ -13,6 +14,7 @@ from tiles.base.Tile import Tile
 
 level_paths = {}
 level_configs = {}
+level_backgrounds = {}
 entity_map = {}
 
 image_file_formats = [".png", ".jpg", ".jpeg", ".bmp"]
@@ -46,7 +48,6 @@ def load_entity_map():
 
 load_entity_map()
 
-
 def load_levels():
     for path in [f.path for f in os.scandir("../levels") if f.is_dir()]:
         config = configparser.ConfigParser()
@@ -54,6 +55,11 @@ def load_levels():
         level_name = config["General"]["Name"]
         level_paths[level_name] = path
         level_configs[level_name] = config
+        paths = [x for x in os.scandir(path) if "background" in os.path.splitext(x)[0]]
+        if len(paths) <= 0:
+            continue
+        path = paths[0]
+        level_backgrounds[level_name] = pygame.image.load(os.path.relpath(path, os.getcwd()))
 
 
 def get_level_by_index(index):
@@ -137,6 +143,7 @@ class Level:
         self.color_map = {}
         self.map_image = None
         self.map_shape = (0, 0)
+        self.background = None
 
     def load(self):
         try:
@@ -147,6 +154,10 @@ class Level:
         self.color_map = get_color_map(self)
         self.map_image, self.map_shape = load_map_image(self)
         self.entities, self.tiles = load_entities(self.color_map, self.map_image, self.map_shape)
+        if self.name in level_backgrounds:
+            self.background = level_backgrounds[self.name]
+        else:
+            self.background = level_backgrounds["Default"]
 
         return
 
