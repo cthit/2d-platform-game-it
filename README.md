@@ -246,7 +246,7 @@ The entity class also has the following methods:
 - `clear(self)` ... ? ... 
 - `__del__(self)` ... ? ... 
 
-###### Entities and Behaviours
+##### Entities and Behaviours
 
 Some of these methods are used for adding and getting behaviours so for easy referens, to add a new Behaviour to the entity use the `register_behaviour(self, behaviour)` or `register_behaviours(self, behaviours)` methods (generally called from the constructor, \__init\__). For example, to add the fall behaviour to an entity:
 
