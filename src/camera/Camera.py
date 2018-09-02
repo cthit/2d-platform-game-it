@@ -29,8 +29,11 @@ class Camera:
         return modes[self.settings["mode"]](self.settings, self.screen, self.level, self.target)
 
     def render_background(self, background, bounding_box=None):
-        #TODO eliassu 2018-09-02, make parallax amount configurable
-        parallax_amount = 10
+        parallax_amount = 0
+        try:
+            parallax_amount = float(self.settings['backgroundparallaxamount'])
+        except KeyError:
+            pass
         if background is None:
             return
         if bounding_box is None:
@@ -47,8 +50,8 @@ class Camera:
         parallax_padding_x = size_x - size_x / parallax_scale_factor
         parallax_padding_y = size_y - size_y / parallax_scale_factor
 
-        pos_x = -(pos_x / map_width) * parallax_padding_x * 0.5
-        pos_y = -(pos_y / map_height) * parallax_padding_y * 0.5
+        pos_x = -(pos_x / max(map_width, self.screen.get_size()[0] / bounding_box.block_width)) * parallax_padding_x * 0.5
+        pos_y = -(pos_y / max(map_height, self.screen.get_size()[1] / bounding_box.block_height)) * parallax_padding_y * 0.5
 
         sprite = pygame.transform.scale(background, size)
         self.screen.blit(sprite, (pos_x, pos_y))
