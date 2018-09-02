@@ -86,12 +86,6 @@ class Collide(Behaviour):
             if self.x_interval is not None:
                 quad_tree.update_intervals(owner, self.x_interval, self.y_interval)
 
-    # The collision behaviour is only intended to add functionality
-    # that can be utilized by other behaviours of an entity.
-    # The update function should not do anything here
-    def update(self, new_owner, delta_time, keys, config):
-        pass
-
     def get_other_colliding(self, x_interval, y_interval):
         colliding = get_colliding(x_interval, y_interval)
         to_discard = [self.owner]

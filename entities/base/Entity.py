@@ -81,7 +81,7 @@ class Entity:
 
     def update(self, delta_time, keys, config, state):
         for name, behaviour in self.behaviours.items():
-            behaviour.update(self, delta_time, keys, config)
+            behaviour.update(delta_time, keys, config)
         self.update_position(delta_time)
         if self.deletion_pending:
             self.clear()

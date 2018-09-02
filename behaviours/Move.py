@@ -10,10 +10,10 @@ class Move(Behaviour):
         self.key_map = key_map
         self.movement_speed = movement_speed
 
-    def update(self, owner, delta_time, keys, config):
+    def update(self, delta_time, keys, config):
         if keys[self.key_map["left"]]:
-            owner.velocity.x = -self.movement_speed
+            self.owner.velocity.x = -self.movement_speed
         elif keys[self.key_map["right"]]:
-            owner.velocity.x = self.movement_speed
+            self.owner.velocity.x = self.movement_speed
         else:
-            owner.velocity.x = 0
+            self.owner.velocity.x = 0

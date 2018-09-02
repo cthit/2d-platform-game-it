@@ -10,6 +10,3 @@ class Character(Entity):
         self.movement_speed = 7
         self.register_behaviour(Fall())
         self.register_behaviour(Jump())
-
-    def update(self, delta_time, keys, config, state):
-        super().update(delta_time, keys, config, state)
