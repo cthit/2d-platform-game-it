@@ -45,7 +45,7 @@ The state class is used to pass on the current state of the game to the differen
 The information contained in the state class is:
 
 - `goal_reached` which is a method that will make the game go to the next level.
-- `respawn_player` which is a method that will respawn the player.
+- `reload_entities` which is a method that will reset the position of all entities to their spawn position.
 - `level_size` contains the level size, you get the width through `level_size[0]` and the height through `level_size[1]`.
 
 ### Behaviours
@@ -220,6 +220,21 @@ def update(self, delta_time, keys, config, state):
 - The **keys** parameter contains information about which keys are currently pressed and originates from pygame.key.get_pressed() more information can be found [here](https://www.pygame.org/docs/ref/key.html#pygame.key.get_pressed)
 - The **config** parameter the current levels configuration data from it's config.ini, this is useful for things like getting the current gravity or if you want to add/use your own level-unique configs.
 - The **state** contains information about the current game state. More information about the state class can be found [here](#the-state-class).
+
+The entity class has the following properties:
+
+- `deletion_pending` a boolean that if set to `True` will remove the entity in the next update.
+- `spawn_x` the x spawn position of the entity.
+- `spawn_y` the y spawn position of the entity.
+- `x` the current x position of the entity.
+- `y` the current y position of the entity.
+- `width` the width of the entity.
+- `height` the height of the entity.
+- `velocity` a 2d vector that contains the current frame x and y velocities respectivly (are set to [0, 0] at every update), the x can be accessed through `self.velocity.x` and y through `self.velocity.y`. 
+- `behaviours` a list of all the entities behaviours.
+- `listeners` a list of all the entities listeners.
+- `name` the name of the entity.
+- `onFloor` which says wether or not the entity is current on a floor.
 
 The entity class also has the following methods:
 
