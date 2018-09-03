@@ -99,7 +99,7 @@ def get_color_map(level):
     color_map = {}
     config = combine_configs(load_config(level.path + "/color-map.ini"), default_color_map)
     for key in config["Colors"]:
-        color_map[hex_to_rgb(key)] = entity_map[config["Colors"][key]]
+        color_map[hex_to_rgb(key)] = (config["Colors"][key], entity_map[config["Colors"][key]])
     return color_map
 
 
@@ -117,18 +117,24 @@ def load_map_image(level):
 
 def load_entities(color_map, map_image, image_shape):
     entities = []
+    entity_lookup = {}
     tiles = []
 
     for ix, iy in np.ndindex(image_shape):
         rgb = tuple(map_image[ix, iy])
         if rgb in color_map:
-            entity = color_map[rgb](iy, ix)
+            entity = color_map[rgb][1](iy, ix)
+            entity_name = color_map[rgb][0]
             if isinstance(entity, Tile):
                 tiles.append(entity)
             else:
+                if entity_name in entity_lookup:
+                    entity_lookup[entity_name].append(entity)
+                else:
+                    entity_lookup[entity_name] = [entity]
                 entities.append(entity)
 
-    return entities, tiles
+    return entities, tiles, entity_lookup
 
 
 class Level:
@@ -144,6 +150,7 @@ class Level:
         self.map_image = None
         self.map_shape = (0, 0)
         self.background = None
+        self.entity_lookup_map = {}
 
     def load(self):
         try:
@@ -153,7 +160,7 @@ class Level:
             pass
         self.color_map = get_color_map(self)
         self.map_image, self.map_shape = load_map_image(self)
-        self.entities, self.tiles = load_entities(self.color_map, self.map_image, self.map_shape)
+        self.entities, self.tiles, self.entity_lookup_map = load_entities(self.color_map, self.map_image, self.map_shape)
         if self.name in level_backgrounds:
             self.background = level_backgrounds[self.name]
         else:
@@ -161,12 +168,10 @@ class Level:
 
         return
 
-    def get_entity(self, entity_name):
-        # TODO eliassu 2018-08-26: Optimize
-        for entity in self.entities:
-            if entity.name == entity_name:
-                return entity
-        raise Exception("Invalid entity!")
+    def get_entities(self, entity_name):
+        if entity_name in self.entity_lookup_map:
+            return self.entity_lookup_map[entity_name]
+        raise Exception("Invalid entity!, " + entity_name)
 
     def get_y(self, number, unit):
         if unit == "percent":
@@ -178,6 +183,14 @@ class Level:
             return self.map_shape[0] * number / 100
         return number
 
+    def spawn_entity(self, entity_class, entity_name, *args):
+        entity = entity_class(*args)
+        self.entities.append(entity)
+        if entity_name in self.entity_lookup_map:
+            self.entity_lookup_map[entity_name].append(entity)
+        else:
+            self.entity_lookup_map[entity_name] = entity
+
     def clear(self):
         for tile in self.tiles:
             tile.clear()
@@ -185,6 +198,7 @@ class Level:
         for entity in self.entities:
             entity.clear()
         self.entities.clear()
+        self.entity_lookup_map.clear()
 
     def __del__(self):
         self.clear()

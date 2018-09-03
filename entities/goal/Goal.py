@@ -1,5 +1,6 @@
 from behaviours.Collide import Collide
 from entities.base.Entity import Entity
+from src.GameMethods import GameMethods
 
 
 class Goal(Entity):
@@ -7,17 +8,18 @@ class Goal(Entity):
         super().__init__(x, y, name)
         self.register_behaviour(Collide())
         self.get_behaviour("Collide").is_trigger = True
+        self.go_to_next_level = None
 
-    def update(self, deltaTime, keys, config, state):
-        super().update(deltaTime, keys, config, state)
-        self.goal_reached = state.goal_reached
+    def update(self, deltaTime, keys, config, game_methods: GameMethods):
+        super().update(deltaTime, keys, config, game_methods)
+        self.go_to_next_level = game_methods.go_to_next_level
 
     def trigger(self, collider):
         if collider.name == "Player":
-            if self.goal_reached is None:
+            if self.go_to_next_level is None:
                 pass
             else:
-                self.goal_reached()
+                self.go_to_next_level()
 
 
 

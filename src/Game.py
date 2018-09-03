@@ -1,7 +1,7 @@
 import pygame
 
+from src.GameMethods import GameMethods
 from src.camera.Camera import Camera
-from src.LevelData import LevelData
 from src.gui.Gui import Gui
 from src.gui.elements.text.TextBlock import TextBlock
 from src.level import Level
@@ -17,11 +17,11 @@ class Game:
         pygame.init()
         pygame.font.init()
         pygame.display.set_caption("2d platform game it")
+        self.game_methods = GameMethods(self)
         self.screen = pygame.display.set_mode((800, 450))
         self.camera = Camera(self.screen)
         self.isRunning = True
         self.level = None
-        self.state = LevelData(self.load_next_level, self.reload_entities, None)
         self.gui = Gui()
 
     def load_level(self, index):
@@ -35,12 +35,11 @@ class Game:
             self.gui.clear_view()
             try:
                 view_name = self.level.config["GUI"]["view"]
-                self.gui.load_view(view_name, self)
+                self.gui.load_view(view_name, self.game_methods)
             except KeyError:
                 pass
             self.camera.set_settings(self.level.config["Camera"])
             self.camera.set_level(self.level)
-            self.state.level_size = self.level.map_shape
             self.fps_counter = TextBlock("Fps: ", 20, 20)
             self.gui.add_gui_element(self.fps_counter)
             self.time = 0
@@ -90,7 +89,7 @@ class Game:
         pressed_keys = pygame.key.get_pressed()
 
         for entity in self.level.entities:
-            entity.update(delta_time, pressed_keys, self.level.config, self.state)
+            entity.update(delta_time, pressed_keys, self.level.config, self.game_methods)
         pass
 
     def render(self):

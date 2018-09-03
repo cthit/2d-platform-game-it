@@ -3,6 +3,8 @@ import os
 
 import pygame
 
+from src.GameMethods import GameMethods
+
 LEFT = 1
 
 view_loaders = {}
@@ -47,8 +49,8 @@ class Gui:
     def clear_view(self):
         self.gui_elements.clear()
 
-    def load_view(self, view_name, game):
-        view_loaders[view_name](self, game)
+    def load_view(self, view_name, game_methods: GameMethods):
+        view_loaders[view_name](self, game_methods)
 
     def add_gui_element(self, gui_element):
         self.gui_elements.append(gui_element)

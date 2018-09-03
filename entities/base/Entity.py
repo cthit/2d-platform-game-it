@@ -4,6 +4,7 @@ from pdb import set_trace
 import pygame
 
 from behaviours import Collide
+from src.GameMethods import GameMethods
 from src.utils.ClassGetter import get_class_that_defined_method
 
 
@@ -81,7 +82,7 @@ class Entity:
         for name, behaviour in behaviours.items():
             self.register_behaviour(behaviour)
 
-    def update(self, delta_time, keys, config, state):
+    def update(self, delta_time, keys, config, game_methods: GameMethods):
         for name, behaviour in self.behaviours.items():
             behaviour.update(delta_time, keys, config)
         self.update_position(delta_time)

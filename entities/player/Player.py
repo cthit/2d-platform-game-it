@@ -2,6 +2,7 @@ import pygame
 
 from behaviours.Move import Move
 from entities.character.Character import Character
+from src.GameMethods import GameMethods
 
 
 class Player(Character):
@@ -9,11 +10,8 @@ class Player(Character):
         super().__init__(x, y, name)
         self.register_behaviour(Move(self.movement_speed))
 
-    def update(self, deltaTime, keys, config, state):
-        super().update(deltaTime, keys, config, state)
+    def update(self, deltaTime, keys, config, game_methods: GameMethods):
+        super().update(deltaTime, keys, config, game_methods)
 
-        if state.reload_entities is None:
-            pass
-
-        if self.y < -5 or self.y > state.level_size[1] + 5:
-            state.reload_entities()
+        if self.y < -5 or self.y > game_methods.get_level_dimensions()[1] + 5:
+            game_methods.restart_level()

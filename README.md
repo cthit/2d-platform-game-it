@@ -9,7 +9,7 @@ The purpose of the project is to be easily modifiable both for people with and w
 
 1. [Introduction](#introduction)
 2. [General Information](#general-information)
-   - [The State Class](#the-state-class)
+   - [The GameMethods Class](#the-gamemethods-class)
    - [Behaviours](#behaviours)
 3. [Simplest Modifications](#simplest-modifications)
    - [Level Creation](#level-creation)
@@ -39,14 +39,14 @@ The game is built around making it very simple of adding new content to the game
 
 ## General Information
 
-### The State Class
+### The GameMethods Class
 
-The state class is used to pass on the current state of the game to the different entities of the game.
-The information contained in the state class is:
+GameMethods is an object that exposes certain methods of the main Game class:
 
-- `goal_reached` which is a method that will make the game go to the next level.
-- `reload_entities` which is a method that will reset the position of all entities to their spawn position.
-- `level_size` contains the level size, you get the width through `level_size[0]` and the height through `level_size[1]`.
+- `find_entities(name)` returns all entities of the given name
+- `go_to_next_level()` clears the current level and loads the next
+- `reload_entities()` resets the level to its initial state, might be used for example when the player dies.
+- `get_level_dimensions()` returns a tuple with the dimensions of the current level, `(width, height)`.
 
 ### Behaviours
 
@@ -212,14 +212,14 @@ class Enemy(Character):
 Entity also have some default methods that can be overriden to add new features to the game most nobable of these is the update method which is called once every frame and looks like this:
 
 ```python
-def update(self, delta_time, keys, config, state):
+def update(self, delta_time, keys, config, game_methods):
     ...
 ```
 
 - The **delta_time** parameter is the time passed since the last frame and can be used to make sure things run smooth in any framerate, for example for movement you most likely want to multiply the speed with the delta_time to determine the distance to be moved that frame to make sure the movementspeed is consitent every second.
 - The **keys** parameter contains information about which keys are currently pressed and originates from pygame.key.get_pressed() more information can be found [here](https://www.pygame.org/docs/ref/key.html#pygame.key.get_pressed)
 - The **config** parameter the current levels configuration data from it's config.ini, this is useful for things like getting the current gravity or if you want to add/use your own level-unique configs.
-- The **state** contains information about the current game state. More information about the state class can be found [here](#the-state-class).
+- The **game_methods** object contains methods related to the entire game. More information about the GameMethods class can be found [here](#the-gamemethods-class).
 
 The entity class has the following properties:
 

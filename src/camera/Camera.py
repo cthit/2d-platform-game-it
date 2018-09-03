@@ -27,7 +27,7 @@ class Camera:
 
     def get_bounding_box(self):
         if self.target is None and "target" in self.settings:
-            self.target = self.level.get_entity(self.settings["target"])
+            self.target = self.level.get_entities(self.settings["target"])[0]
         return modes[self.settings["mode"]](self.settings, self.screen, self.level, self.target)
 
     def render_background(self, background, bounding_box=None):
