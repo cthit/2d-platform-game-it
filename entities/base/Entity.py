@@ -11,6 +11,8 @@ class Entity:
 
     def __init__(self, x, y, name):
         self.deletion_pending = False
+        self.spawn_x = x
+        self.spawn_y = y
         self.x = x  # do not modify directly, use self.set_x
         self.y = y  # do not modify directly, use self.set_y
         self.width = 1  # do not modify directly, use self.set_width
