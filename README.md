@@ -234,7 +234,6 @@ The entity class has the following properties:
 - `behaviours` a list of all the entities behaviours.
 - `listeners` a list of all the entities listeners.
 - `name` the name of the entity.
-- `onFloor` which says wether or not the entity is current on a floor.
 
 The entity class also has the following methods:
 
