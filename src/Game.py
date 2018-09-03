@@ -21,7 +21,7 @@ class Game:
         self.camera = Camera(self.screen)
         self.isRunning = True
         self.level = None
-        self.state = LevelData(self.load_next_level, self.respawn_player, None)
+        self.state = LevelData(self.load_next_level, self.reload_entities, None)
         self.gui = Gui()
 
     def load_level(self, index):
@@ -49,9 +49,11 @@ class Game:
             pass
         return True
 
-    def respawn_player(self):
-        print("Add code to respawn the player.")
-        pass
+    def reload_entities(self):
+        for entity in self.level.entities:
+            entity.set_x(entity.spawn_x)
+            entity.set_y(entity.spawn_y)
+            entity.velocity = pygame.math.Vector2(0, 0)
 
     def load_next_level(self):
         '''method to change to next level (numberwise)'''

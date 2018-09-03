@@ -17,7 +17,6 @@ class Entity:
         self.y = y  # do not modify directly, use self.set_y
         self.width = 1  # do not modify directly, use self.set_width
         self.height = 1  # do not modify directly, use self.set_height
-        self.velocity = pygame.math.Vector2(0, 0)
         self.behaviours = {}
         self.listeners = {}
         self.name = name

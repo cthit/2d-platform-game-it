@@ -1,5 +1,5 @@
 class LevelData:
-    def __init__(self, goal_reached, respawn_player, level_size):
+    def __init__(self, goal_reached, reload_entities, level_size):
         self.goal_reached = goal_reached
-        self.respawn_player = respawn_player
+        self.reload_entities = reload_entities
         self.level_size = level_size
