@@ -45,7 +45,7 @@ The state class is used to pass on the current state of the game to the differen
 The information contained in the state class is:
 
 - `goal_reached` which is a method that will make the game go to the next level.
-- `respawn_player` which is a method that will respawn the player.
+- `reload_entities` which is a method that will reset the position of all entities to their spawn position.
 - `level_size` contains the level size, you get the width through `level_size[0]` and the height through `level_size[1]`.
 
 ### Behaviours
