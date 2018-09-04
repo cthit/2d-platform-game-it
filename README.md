@@ -24,7 +24,7 @@ The purpose of the project is to be easily modifiable both for people with and w
 
 ## Introduction
 
-The game is built around making it very simple of adding new content to the game. The game is split into a few different parts:
+The game is built around making it very simple of adding new content to the game and is therefor split into a few different parts:
 
 - Tiles:
   - Basic unmovable block in the game world, basically only an image you can collide with.
@@ -34,6 +34,8 @@ The game is built around making it very simple of adding new content to the game
   - Entities can have behaviours such as Collide, Jump, Move etc.
 - Ui:
   - The ui components are buttons, text, non-entity images that interacts with the player.
+
+All of these are modifiable in different ways which are described below.
 
 ---
 
