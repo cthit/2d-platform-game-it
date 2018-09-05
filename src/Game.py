@@ -45,7 +45,7 @@ class Game:
             self.gui.add_gui_element(self.fps_counter)
             self.gui.add_gui_element(self.time_text)
             self.time = 0
-            self.time_at_last_text_update = 0
+            self.time_at_last_fps_update = 0
             self.frame_count = 0
         except KeyError:
             pass
@@ -74,25 +74,26 @@ class Game:
         self.frame_count += 1
 
         # Update Fps & clock text
-        time_since_last_text_update = self.time - self.time_at_last_text_update
+        time_since_last_fps_update = self.time - self.time_at_last_fps_update
         # Updates 20x/s
-        if time_since_last_text_update >= 0.02:
+        if time_since_last_fps_update >= 0.05:
             try:
-                fps = int(self.frame_count / time_since_last_text_update)
-                time_in_sec = self.time
-                milli_seconds = int(time_in_sec * 10)
-                seconds = int(time_in_sec % 60)
-                time_in_min = (time_in_sec - seconds) / 60
-                minutes = int(time_in_min % 60)
-                hours = int((time_in_min - minutes) / 60)
+                fps = int(self.frame_count / time_since_last_fps_update)
 
                 self.fps_counter.update_text("Fps: " + str(fps))
-                self.time_text.update_text("LevelTime: " + str(hours) + ":" + str(minutes) + ":" + str(seconds) + ":" + str(milli_seconds))
             except:
                 pass
-            self.time_at_last_text_update = self.time
+            self.time_at_last_fps_update = self.time
             self.frame_count = 0
 
+        # Update time
+        time_in_sec = self.time
+        milli_seconds = int(time_in_sec * 100)
+        seconds = int(time_in_sec % 60)
+        time_in_min = (time_in_sec - seconds) / 60
+        minutes = int(time_in_min % 60)
+        hours = int((time_in_min - minutes) / 60)
+        self.time_text.update_text("LevelTime: " + str(hours) + ":" + str(minutes) + ":" + str(seconds) + ":" + str(milli_seconds))
 
         events = pygame.event.get()
 
