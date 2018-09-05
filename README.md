@@ -52,7 +52,7 @@ GameMethods is an object that exposes certain methods of the main Game class:
 
 ### Behaviours
 
-Behaviours are used to define the well... behaviours of an entity for example some built in behaviours are:
+Behaviours are used to define the different behaviours of an entity for example some built in behaviours are:
 
 - **Collide** which allows the entity to collide with other entities or tiles.
 - **Fall** which makes the entity be affected by gravity.
