@@ -76,17 +76,18 @@ class Game:
         # Update Fps & clock text
         time_since_last_text_update = self.time - self.time_at_last_text_update
         # Updates 20x/s
-        if time_since_last_text_update >= 0.05:
+        if time_since_last_text_update >= 0.02:
             try:
                 fps = int(self.frame_count / time_since_last_text_update)
                 time_in_sec = self.time
+                milli_seconds = int(time_in_sec * 10)
                 seconds = int(time_in_sec % 60)
                 time_in_min = (time_in_sec - seconds) / 60
                 minutes = int(time_in_min % 60)
                 hours = int((time_in_min - minutes) / 60)
 
                 self.fps_counter.update_text("Fps: " + str(fps))
-                self.time_text.update_text("LevelTime: " + str(hours) + "h:" + str(minutes) + "m:" + str(seconds) + "s")
+                self.time_text.update_text("LevelTime: " + str(hours) + ":" + str(minutes) + ":" + str(seconds) + ":" + str(milli_seconds))
             except:
                 pass
             self.time_at_last_text_update = self.time
