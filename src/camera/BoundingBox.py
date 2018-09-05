@@ -1,5 +1,3 @@
-from intervaltree import Interval
-
 from behaviours import Collide
 
 
