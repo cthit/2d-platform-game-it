@@ -4,10 +4,10 @@ from src.gui.GuiElement import GuiElement
 pygame.font.init()
 
 button_images = {
-    "light": pygame.image.load("../resources/button_light.png"),
-    "dark": pygame.image.load("../resources/button_dark.png"),
-    "green": pygame.image.load("../resources/button_green.png"),
-    "blue": pygame.image.load("../resources/button_blue.png")
+    "light": pygame.image.load("../resources/gui/button_light.png"),
+    "dark": pygame.image.load("../resources/gui/button_dark.png"),
+    "green": pygame.image.load("../resources/gui/button_green.png"),
+    "blue": pygame.image.load("../resources/gui/button_blue.png")
 }
 
 
