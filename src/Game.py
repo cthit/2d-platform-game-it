@@ -41,8 +41,11 @@ class Game:
             self.camera.set_settings(self.level.config["Camera"])
             self.camera.set_level(self.level)
             self.fps_counter = TextBlock("Fps: ", 20, 20)
+            self.time_text = TextBlock("T: ", (self.screen.get_rect().width / 2) - 40, 20)
             self.gui.add_gui_element(self.fps_counter)
+            self.gui.add_gui_element(self.time_text)
             self.time = 0
+            self.time_at_last_text_update = 0
             self.frame_count = 0
         except KeyError:
             pass
@@ -70,14 +73,25 @@ class Game:
         self.time += delta_time
         self.frame_count += 1
 
-        if self.time >= 0.05:
+        # Update Fps & clock text
+        time_since_last_text_update = self.time - self.time_at_last_text_update
+        # Updates 20x/s
+        if time_since_last_text_update >= 0.05:
             try:
-                fps = int(self.frame_count / self.time)
+                fps = int(self.frame_count / time_since_last_text_update)
+                time_in_sec = self.time
+                seconds = int(time_in_sec % 60)
+                time_in_min = (time_in_sec - seconds) / 60
+                minutes = int(time_in_min % 60)
+                hours = int((time_in_min - minutes) / 60)
+
                 self.fps_counter.update_text("Fps: " + str(fps))
+                self.time_text.update_text("LevelTime: " + str(hours) + "h:" + str(minutes) + "m:" + str(seconds) + "s")
             except:
                 pass
-            self.time = 0
+            self.time_at_last_text_update = self.time
             self.frame_count = 0
+
 
         events = pygame.event.get()
 
