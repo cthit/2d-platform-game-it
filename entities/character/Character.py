@@ -12,3 +12,4 @@ class Character(Entity):
         self.movement_speed = 7
         self.register_behaviour(Fall())
         self.register_behaviour(Jump())
+        self.get_behaviour(Collide).affects_motion = True

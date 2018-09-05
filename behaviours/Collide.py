@@ -1,3 +1,7 @@
+from collections import Set
+from typing import List
+
+from entities.base.Entity import Entity
 from src.utils.QuadTree import Index as QuadTree
 
 from behaviours.Behaviour import Behaviour
@@ -41,10 +45,11 @@ def get_colliding(x_interval, y_interval):
 
 
 class Collide(Behaviour):
-    def __init__(self, owner=None, is_trigger=False):
+    def __init__(self, owner=None, is_trigger=False, affects_motion=False):
         self.x_interval = None
         self.y_interval = None
         self.is_trigger = is_trigger
+        self.affects_motion = affects_motion
         if owner is None:
             self.owner = None
             return
@@ -102,28 +107,34 @@ class Collide(Behaviour):
 
         return colliding
 
-    def check_inside(self):
+    def check_inside(self) -> List[Entity]:
         return self.get_other_colliding(self.x_interval, self.y_interval)
 
-    def check_bottom(self, distance=1):
+    def check_bottom(self, distance=1) -> List[Entity]:
         owner = self.owner
         y_interval = (owner.get_bottom(), owner.get_bottom() + distance)
         return self.get_other_colliding(self.x_interval, y_interval)
 
-    def check_top(self, distance=1):
+    def check_top(self, distance=1) -> List[Entity]:
         owner = self.owner
         y_interval = (owner.get_top() - distance, owner.get_top())
         return self.get_other_colliding(self.x_interval, y_interval)
 
-    def check_left(self, distance=1):
+    def check_left(self, distance=1) -> List[Entity]:
         owner = self.owner
         x_interval = (owner.get_left() - distance, owner.get_left())
         return self.get_other_colliding(x_interval, self.y_interval)
 
-    def check_right(self, distance=1):
+    def check_right(self, distance=1) -> List[Entity]:
         owner = self.owner
         x_interval = (owner.get_right(), owner.get_right() + distance)
         return self.get_other_colliding(x_interval, self.y_interval)
+
+    def check_around(self, distance=1) -> List[Entity]:
+        owner = self.owner
+        x_interval = (owner.get_left() - distance, owner.get_right() + distance)
+        y_interval = (owner.get_top() - distance, owner.get_bottom() + distance)
+        return self.get_other_colliding(x_interval, y_interval)
 
     def clear(self):
         quad_tree.remove(self.owner)

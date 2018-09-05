@@ -5,8 +5,6 @@ import pygame
 
 from src.GameMethods import GameMethods
 
-LEFT = 1
-
 view_loaders = {}
 
 
@@ -28,23 +26,9 @@ class Gui:
     def __init__(self):
         self.gui_elements = list()
 
-    def update(self, mouse, events):
-        curr_element = None
+    def update(self, mouse, events, delta_time, keys, config, game_methods: GameMethods):
         for element in self.gui_elements:
-            if element.contains(*mouse.get_pos()):
-                curr_element = element
-                element.on_hover()
-
-        if curr_element is not None:
-            for event in events:
-                # Check onMouseDown for left mouse button.
-                if event.type == pygame.MOUSEBUTTONDOWN and event.button == LEFT:
-                    curr_element.on_mouse_down()
-                # Check onMouseUp for left mouse button.
-                elif event.type == pygame.MOUSEBUTTONUP and event.button == LEFT:
-                    curr_element.on_mouse_up()
-
-        curr_element = None
+            element.update(mouse, events, delta_time, keys, config, game_methods)
 
     def clear_view(self):
         self.gui_elements.clear()

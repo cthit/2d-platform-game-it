@@ -33,3 +33,6 @@ class Button(GuiElement):
 
     def on_mouse_up(self):
         self.callback()
+
+    def on_mouse_leave(self):
+        self.image = button_images["green"]

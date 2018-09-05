@@ -10,6 +10,7 @@ import pygame
 from PIL import Image
 import os
 
+from behaviours.Collide import Collide
 from tiles.base.Tile import Tile
 
 level_paths = {}
@@ -128,6 +129,7 @@ def load_entities(color_map, map_image, image_shape):
             if isinstance(entity, Tile):
                 tiles.append(entity)
             else:
+                entity.remain_on_reset = True
                 if entity_name in entity_lookup:
                     entity_lookup[entity_name].append(entity)
                 else:
@@ -151,6 +153,7 @@ class Level:
         self.map_shape = (0, 0)
         self.background = None
         self.entity_lookup_map = {}
+        self.graveyard = []
 
     def load(self):
         try:
@@ -168,6 +171,20 @@ class Level:
 
         return
 
+    def kill_entity(self, entity):
+        if entity in self.entities:
+            self.entities.remove(entity)
+        entity.get_behaviour(Collide).clear()
+        entity.is_dead = True
+        if entity.remain_on_reset:
+            self.graveyard.append(entity)
+
+    def revive_entities(self):
+        self.entities.extend(self.graveyard)
+        for entity in self.graveyard:
+            entity.is_dead = False
+        self.graveyard.clear()
+
     def get_entities(self, entity_name):
         if entity_name in self.entity_lookup_map:
             return self.entity_lookup_map[entity_name]
@@ -183,13 +200,15 @@ class Level:
             return self.map_shape[0] * number / 100
         return number
 
-    def spawn_entity(self, entity_class, entity_name, *args):
-        entity = entity_class(*args)
+    def spawn_entity(self, entity_class, x, y):
+        entity_name = entity_class.__name__
+        entity = entity_class(x, y, entity_name)
         self.entities.append(entity)
         if entity_name in self.entity_lookup_map:
             self.entity_lookup_map[entity_name].append(entity)
         else:
-            self.entity_lookup_map[entity_name] = entity
+            self.entity_lookup_map[entity_name] = [entity]
+        return entity
 
     def clear(self):
         for tile in self.tiles:

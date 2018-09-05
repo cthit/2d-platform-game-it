@@ -40,10 +40,6 @@ class Game:
                 pass
             self.camera.set_settings(self.level.config["Camera"])
             self.camera.set_level(self.level)
-            self.fps_counter = TextBlock("Fps: ", 20, 20)
-            self.time_text = TextBlock("T: ", (self.screen.get_rect().width / 2) - 40, 20)
-            self.gui.add_gui_element(self.fps_counter)
-            self.gui.add_gui_element(self.time_text)
             self.time = 0
             self.time_at_last_fps_update = 0
             self.frame_count = 0
@@ -52,10 +48,9 @@ class Game:
         return True
 
     def reload_entities(self):
-        for entity in self.level.entities:
-            entity.set_x(entity.spawn_x)
-            entity.set_y(entity.spawn_y)
-            entity.velocity = pygame.math.Vector2(0, 0)
+        self.level.revive_entities()
+        for entity in [*self.level.entities]:
+            entity.reset()
 
     def load_next_level(self):
         '''method to change to next level (numberwise)'''
@@ -70,39 +65,14 @@ class Game:
             self.load_level(-2)
 
     def update(self, delta_time):
-        self.time += delta_time
-        self.frame_count += 1
-
-        # Update Fps & clock text
-        time_since_last_fps_update = self.time - self.time_at_last_fps_update
-        # Updates 20x/s
-        if time_since_last_fps_update >= 0.05:
-            try:
-                fps = int(self.frame_count / time_since_last_fps_update)
-
-                self.fps_counter.update_text("Fps: " + str(fps))
-            except:
-                pass
-            self.time_at_last_fps_update = self.time
-            self.frame_count = 0
-
-        # Update time
-        time_in_sec = self.time
-        milli_seconds = int(time_in_sec * 100)
-        seconds = int(time_in_sec % 60)
-        time_in_min = (time_in_sec - seconds) / 60
-        minutes = int(time_in_min % 60)
-        hours = int((time_in_min - minutes) / 60)
-        self.time_text.update_text("LevelTime: " + str(hours) + ":" + str(minutes) + ":" + str(seconds) + ":" + str(milli_seconds))
-
         events = pygame.event.get()
+        pressed_keys = pygame.key.get_pressed()
 
         for event in events:
             if event.type == pygame.QUIT:
                 self.isRunning = False
-        self.gui.update(pygame.mouse, events)
 
-        pressed_keys = pygame.key.get_pressed()
+        self.gui.update(pygame.mouse, events, delta_time, pressed_keys, self.level.config, self.game_methods)
 
         for entity in self.level.entities:
             entity.update(delta_time, pressed_keys, self.level.config, self.game_methods)

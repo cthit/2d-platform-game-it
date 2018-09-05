@@ -1,5 +1,7 @@
 import os
+import string
 from pdb import set_trace
+from typing import TypeVar, Union, Type
 
 import pygame
 
@@ -7,10 +9,13 @@ from behaviours import Collide
 from src.GameMethods import GameMethods
 from src.utils.ClassGetter import get_class_that_defined_method
 
+image_file_formats = [".png", ".jpg", ".jpeg", ".bmp"]
+
 
 class Entity:
 
     def __init__(self, x, y, name):
+        self.friction_coefficient = 10
         self.deletion_pending = False
         self.spawn_x = x
         self.spawn_y = y
@@ -21,11 +26,15 @@ class Entity:
         self.behaviours = {}
         self.listeners = {}
         self.name = name
+        self.remain_on_reset = False
         self.velocity = pygame.math.Vector2(0, 0)
         self.register_behaviour(Collide.Collide())
-        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../" + name.lower() + "/" + name + ".png")
+        self.is_dead = False
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../" + name.lower())
+        image_paths = [x for x in os.scandir(path) if os.path.splitext(x)[1] in image_file_formats]
+        image_paths.sort(key=lambda x: x.name.lower().startswith(self.name.lower()))
         try:
-            self.sprite = pygame.image.load(path)
+            self.sprite = pygame.image.load(image_paths[0].path)
         except:
             print("Could not load sprite for " + name)
 
@@ -66,38 +75,58 @@ class Entity:
             self.listeners[func_name].remove(callback)
         return
 
-    def get_behaviour(self, behaviour_name):
-        if not isinstance(behaviour_name, str):
-            behaviour_name = behaviour_name.__name__
+    T = TypeVar('T', bound='Behaviour')
+
+    def has_behaviour(self, behaviour_type: Type[T]) -> bool:
+        if not isinstance(behaviour_type, str):
+            behaviour_name = behaviour_type.__name__
+        else:
+            behaviour_name = behaviour_type
+        return behaviour_name in self.behaviours
+
+    def get_behaviour(self, behaviour_type: Type[T]) -> T:
+        if not isinstance(behaviour_type, str):
+            behaviour_name = behaviour_type.__name__
+        else:
+            behaviour_name = behaviour_type
         if behaviour_name in self.behaviours:
             return self.behaviours[behaviour_name]
         else:
             return None
 
-    def register_behaviour(self, behaviour):
+    def register_behaviour(self, behaviour: T) -> T:
         behaviour.set_owner(self, None, None, None)
         self.behaviours[type(behaviour).__name__] = behaviour
+        return behaviour
 
     def register_behaviours(self, behaviours):
         for name, behaviour in behaviours.items():
             self.register_behaviour(behaviour)
 
     def update(self, delta_time, keys, config, game_methods: GameMethods):
+        self._game_methods = game_methods
         for name, behaviour in self.behaviours.items():
-            behaviour.update(delta_time, keys, config)
+            behaviour.update(delta_time, keys, config, game_methods)
+            if self.is_dead:
+                return
+
         self.update_position(delta_time)
         if self.deletion_pending:
             self.clear()
+
+    def die(self):
+        self._game_methods.kill_entity(self)
 
     def update_position(self, delta_time):
         dx = delta_time * self.velocity.x
         dy = delta_time * self.velocity.y
 
         c = self.get_behaviour(Collide.Collide)
-        if c is None:
+        if c is None or not c.affects_motion:
             self.set_y(self.y + dy)
             self.set_x(self.x + dx)
         else:
+            friction = (1 / (1 + self.friction_coefficient)) ** delta_time
             if dy < 0:
                 colliding_top = c.check_top(abs(dy))
                 if len(colliding_top) <= 0:
@@ -105,6 +134,7 @@ class Entity:
                 else:
                     self.move_top_to(Collide.get_bottom_most_of(colliding_top).get_bottom())
                     self.velocity.y = 0
+                    self.velocity.x *= friction
             else:
                 colliding_bottom = c.check_bottom(abs(dy))
                 if len(colliding_bottom) <= 0:
@@ -112,6 +142,7 @@ class Entity:
                 else:
                     self.move_bottom_to(Collide.get_top_most_of(colliding_bottom).get_top())
                     self.velocity.y = 0
+                    self.velocity.x *= friction
             if dx < 0:
                 colliding_left = c.check_left(abs(dx))
                 if len(colliding_left) <= 0:
@@ -119,6 +150,7 @@ class Entity:
                 else:
                     self.move_left_to(Collide.get_right_most_of(colliding_left).get_right())
                     self.velocity.x = 0
+                    self.velocity.y *= friction
             else:
                 colliding_right = c.check_right(abs(dx))
                 if len(colliding_right) <= 0:
@@ -126,6 +158,7 @@ class Entity:
                 else:
                     self.move_right_to(Collide.get_left_most_of(colliding_right).get_left())
                     self.velocity.x = 0
+                    self.velocity.y *= friction
 
     def move_top_to(self, y):
         self.set_y(y)
@@ -162,6 +195,14 @@ class Entity:
 
     def get_right(self):
         return self.x + self.width
+
+    def reset(self):
+        if not self.remain_on_reset:
+            self.die()
+            return
+        self.set_x(self.spawn_x)
+        self.set_y(self.spawn_y)
+        self.velocity = pygame.math.Vector2(0, 0)
 
     def clear(self):
         self.deletion_pending = True
