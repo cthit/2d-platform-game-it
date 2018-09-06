@@ -23,14 +23,19 @@ class Game:
         self.isRunning = True
         self.level = None
         self.gui = Gui()
+        self.previous_level = None
 
     def load_level(self, index):
+        print(index)
         try:
             if self.level is not None:
                 self.level.clear()
+
+            self.previous_level = self.level
             self.level = Level.get_level_by_index(index)
             if self.level is None:
                 raise NoLevelFoundException
+
             self.level.load()
             self.gui.clear_view()
             try:

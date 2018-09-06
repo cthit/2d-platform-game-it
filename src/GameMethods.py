@@ -12,6 +12,9 @@ class GameMethods:
         self.spawn_entity = lambda entity, x, y, *args: game.level.spawn_entity(entity, x, y)
         self.kill_entity = lambda entity: game.level.kill_entity(entity)
         self.get_level = lambda: game.level
+        self.get_previous_level_index = lambda: int(game.previous_level.config["General"]["index"])
+        self.load_level_failed_screen = lambda: self.load_level_by_index(-4)
+        self.load_main_menu = lambda: self.load_level_by_index(0)
 
     def play_sound(self, file_name: str):
         if file_name is not None:
