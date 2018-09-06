@@ -23,12 +23,15 @@ class Entity:
         self.y = y  # do not modify directly, use self.set_y
         self.width = 1  # do not modify directly, use self.set_width
         self.height = 1  # do not modify directly, use self.set_height
+        self.is_flipped_x = False
+        self.is_flipped_y = False
         self.behaviours: Dict[str, Behaviour] = {}
         self.listeners = {}
         self.name = name
         self.remain_on_reset = False
         self.velocity = pygame.math.Vector2(0, 0)
         self.register_behaviour(Collide.Collide())
+        self.transforms = []
         self.is_dead = False
         path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../" + name.lower())
         image_paths = [x for x in os.scandir(path) if os.path.splitext(x)[1] in image_file_formats]
@@ -197,7 +200,10 @@ class Entity:
         return self.x + self.width
 
     def get_renderables(self):
-        res = [Renderable(self.x, self.y, self.width, self.height, self.sprite)]
+        flip_transform = lambda surface: pygame.transform.flip(surface, self.is_flipped_x, self.is_flipped_y)
+        transforms_to_apply = [flip_transform, *self.transforms]
+
+        res = [Renderable(self.x, self.y, self.width, self.height, self.sprite, transforms=transforms_to_apply)]
         for behavior in self.behaviours.values():
             res.extend(behavior.get_renderables())
         return res

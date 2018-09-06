@@ -2,7 +2,7 @@ import pygame
 
 
 class Renderable():
-    def __init__(self, x, y, width, height, sprite=None, draw_function=None):
+    def __init__(self, x, y, width, height, sprite=None, draw_function=None, transforms=[]):
         self.sprite = sprite
         self.draw = draw_function
         if draw_function is None:
@@ -11,6 +11,11 @@ class Renderable():
         self.y = y
         self.width = width
         self.height = height
+        self.transforms = transforms
 
     def _default_draw_function(self, screen, pos, size):
-        screen.blit(pygame.transform.scale(self.sprite, size), pos)
+        surface = self.sprite
+        surface = pygame.transform.scale(surface, size)
+        for transform in self.transforms:
+            surface = transform(surface)
+        screen.blit(surface, pos)

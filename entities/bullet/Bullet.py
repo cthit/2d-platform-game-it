@@ -21,6 +21,8 @@ class Bullet(Entity):
     def update(self, delta_time, keys, config, game_methods: GameMethods):
         super().update(delta_time, keys, config, game_methods)
         c = self.get_behaviour(Collide)
+        if self.velocity.x < 0:
+            self.is_flipped_x = True
         for colliding in c.check_inside():
             if isinstance(colliding, Tile):
                 self.die()
