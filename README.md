@@ -222,9 +222,10 @@ Target = Player
 There are a number of levels already in the game so to avoid unintentional index-clashes, here's a list of the currently existing levels by index, note that indexes <= 0 are used for non game-level levels such as menu screens.
 
 - -10: "large_level_test" a testing level used mostly for optimization purposes.
-- -4: "level_win_screen" the screen for when the player has completed a level.
+- -4: "level_complete_screen" the screen for when the player has completed a level.
 - -3: "level_fail_screen" the screen for when the player has faileda level.
-- -2: "win_screen" the screen for when the player has won the game.
+- -2: "loading_screen" the screen that shows up when levels are loaded (often only seen for brief periods of time).
+- -1: "win_screen" the screen for when the player has won the game.
 - 0: "main_menu" the main menu screen.
 - 1: "level1" the first level.
 - 2: "level2" the seconds level.
