@@ -39,7 +39,7 @@ def get_colliding(x_interval, y_interval):
     epsilon = 1e-10
     x_min, x_max = x_interval
     y_min, y_max = y_interval
-    x_interval = (x_min + epsilon, x_max - epsilon)
+    x_interval = (x_min - epsilon, x_max + epsilon)
     y_interval = (y_min + epsilon, y_max - epsilon)
     return quad_tree.intersect(x_interval, y_interval)
 
