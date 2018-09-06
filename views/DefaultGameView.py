@@ -2,7 +2,7 @@ from behaviours.Collector import Collector
 from entities.base.Entity import Entity
 from src.GameMethods import GameMethods
 from src.gui.elements.clock.Clock import Clock
-from src.gui.elements.coincounter.Counter import Counter
+from src.gui.elements.counter.Counter import Counter
 from src.gui.elements.fpscounter.FpsCounter import FpsCounter
 from src.gui.elements.text.TextBlock import TextBlock
 

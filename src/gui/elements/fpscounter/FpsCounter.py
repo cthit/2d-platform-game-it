@@ -2,7 +2,7 @@ import numpy as np
 
 from src.GameMethods import GameMethods
 from src.gui.GuiElement import GuiElement
-from src.gui.elements.coincounter.Counter import Counter
+from src.gui.elements.counter.Counter import Counter
 
 
 class FpsCounter(GuiElement):
