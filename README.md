@@ -7,20 +7,76 @@ The purpose of the project is to be easily modifiable both for people with and w
 
 ## Table of Contents
 
-1. [Introduction](#introduction)
-2. [General Information](#general-information)
-   - [The GameMethods Class](#the-gamemethods-class)
-   - [Behaviours](#behaviours)
-3. [Simplest Modifications](#simplest-modifications)
-   - [Level Creation](#level-creation)
-   - [Creating new tiles](#creating-new-tiles)
-4. [Intermediate Modifications](#intermediate-modifications)
-   - [Creating new entities](#creating-new-entities)
-   - [Creating new behaviours](#creating-new-behaviours)
-   - [Changing the UI](#changing-the-ui)
-5. [Advanced Modifications](#advanced-modifications)
+- [2d-platform-game-it](#2d-platform-game-it)
+    - [Table of Contents](#table-of-contents)
+    - [Installation (Overly explicit)](#installation-overly-explicit)
+        - [PyCharm Instructions](#pycharm-instructions)
+        - [Unix Instructions (if not runing PyCharm)](#unix-instructions-if-not-runing-pycharm)
+            - [General instructions](#general-instructions)
+    - [Introduction](#introduction)
+    - [General Information](#general-information)
+        - [The GameMethods Class](#the-gamemethods-class)
+        - [Behaviours](#behaviours)
+    - [Simplest modifications](#simplest-modifications)
+        - [Level Creation](#level-creation)
+            - [Config details](#config-details)
+        - [Creating new tiles](#creating-new-tiles)
+    - [Intermediate Modifications](#intermediate-modifications)
+        - [Creating new entities](#creating-new-entities)
+                - [Entities and Behaviours](#entities-and-behaviours)
+        - [Creating new Behaviours](#creating-new-behaviours)
+        - [Changing the UI](#changing-the-ui)
+    - [Advanced Modifications](#advanced-modifications)
 
 ---
+
+## Installation (Overly explicit)
+
+1. if you want to use an IDE, we recommend [PyCharm](https://www.jetbrains.com/pycharm/download/#section=windows) (We recomend this, especially for Windows users). Which should include a python installation
+    - if it does not, install it manually from https://www.python.org/downloads/ or using a package manager 
+
+2. Make sure that you have Git installed on your system if not: 
+    - On *Windows* or [Download](https://git-scm.com/downloads) and install using the wizard or install a graphical git client *i.e* [Gitkraken](https://www.gitkraken.com/).
+    - On a Linux based system (or Mac) install using your package manager of choice 
+
+3. Clone the project into your prefered folder. 
+    - if using GitKraken follow the instructions after installing
+    - if using a Terminal
+
+        `cd <Your preffered folder>`
+
+        `git clone https://github.com/cthit/2d-platform-game-it.git`
+
+### PyCharm Instructions
+- Launch PyCharm and follow the setup. Open the project using PyCharm
+
+- Click on configure Python interpreter in the top right corner and add a new environment. 
+
+- Add packages pygame, pillow and numpy by clicking on the + and searching for them
+
+Done!
+
+### Unix Instructions (if not runing PyCharm)
+
+- change directive to game directive: `cd 2d-platform-game-it`
+
+- install pip by running `python3 -m pip install pip` (probably requires root access so run with sudo)
+
+- setup a virtual environment by running 
+
+    `python3 -m venv <game environment>` 
+
+    replace \<game environment\> with what your enviroment should be called. (probably also requires sudo) 
+
+    Run `source <game environment>/bin/activate` to activate the virtual environment
+- Finally run `pip install pygame pillow numpy`
+- You should be now be setup so try running `python3 main.py` if you run into the error no module named src simply run `export PYTHONPATH=.`
+
+Finally if you run into any problem feel free to contact digIT
+
+
+#### General instructions
+
 
 ## Introduction
 
