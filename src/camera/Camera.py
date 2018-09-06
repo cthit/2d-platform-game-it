@@ -63,8 +63,7 @@ class Camera:
         y, _ = bounding_box.y_interval
         pos = ((renderable.x - x) * bounding_box.block_width, (renderable.y - y) * bounding_box.block_height)
         size = (int(renderable.width * bounding_box.block_width), int(renderable.height * bounding_box.block_height))
-        sprite = pygame.transform.scale(renderable.sprite, size)
-        self.screen.blit(sprite, pos)
+        renderable.draw(self.screen, pos, size)
 
     def clear(self):
         self.screen.fill((100, 100, 100))

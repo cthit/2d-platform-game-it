@@ -26,7 +26,7 @@ class Enemy(Entity):
         self.register_behaviour(Jump())
         self.register_behaviour(Move())
         self.register_behaviour(KnockBack())
-        self.register_behaviour(Health(hit_points=100, show_health_bar=False))
+        self.register_behaviour(Health(hit_points=100, max_hit_points=100, show_health_bar=True))
         self.register_behaviour(Shoot(ammo_class=Bullet, fire_rate=2))
         self.register_behaviour(Ai())
 
