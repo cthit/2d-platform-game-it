@@ -11,6 +11,7 @@ from PIL import Image
 import os
 
 from behaviours.Collide import Collide
+from src.utils.CodeItWarning import CodeItWarning
 from tiles.base.Tile import Tile
 
 level_paths = {}
@@ -47,7 +48,9 @@ def load_entity_map():
             raise ValueError("Tiles cannot have spaces in their names, '" + class_name + "'")
         entity_map[class_name] = constructor_factory(Tile, class_name)
 
+
 load_entity_map()
+
 
 def load_levels():
     for path in [f.path for f in os.scandir("../levels") if f.is_dir()]:
@@ -83,6 +86,10 @@ load_levels()
 
 def hex_to_rgb(h):
     return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
+
+
+def rgb_to_hex(rgb: tuple) -> str:
+    return ('%02x%02x%02x' % rgb).upper()
 
 
 def load_config(path):
@@ -135,6 +142,8 @@ def load_entities(color_map, map_image, image_shape):
                 else:
                     entity_lookup[entity_name] = [entity]
                 entities.append(entity)
+        else:
+            warn("CodeIT:: No Tile or entity mapped to " + rgb_to_hex(rgb), category=CodeItWarning, stacklevel=0)
 
     return entities, tiles, entity_lookup
 
@@ -163,7 +172,8 @@ class Level:
             pass
         self.color_map = get_color_map(self)
         self.map_image, self.map_shape = load_map_image(self)
-        self.entities, self.tiles, self.entity_lookup_map = load_entities(self.color_map, self.map_image, self.map_shape)
+        self.entities, self.tiles, self.entity_lookup_map = load_entities(self.color_map, self.map_image,
+                                                                          self.map_shape)
         self.level_time = int(self.config["General"]["timelimit"])
         if self.name in level_backgrounds:
             self.background = level_backgrounds[self.name]
