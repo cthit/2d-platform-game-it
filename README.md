@@ -381,7 +381,7 @@ def load_view(gui, game):
 The name of the view is defined by the name of the view file. So this would be MainMenu.py, and the main menu level would have `View = MainMenu` in its config.
 
 If the view is a pure GUI screen (not a game level), make sure the ```Type``` property under the ```[General]``` tag in the levels config to "Pure GUI" i.e. for the main menu:
-```
+```ini
 [General]
 Name = Main Menu
 Type = Pure GUI
