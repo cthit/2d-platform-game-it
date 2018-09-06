@@ -69,6 +69,9 @@ class Game:
         events = pygame.event.get()
         pressed_keys = pygame.key.get_pressed()
 
+        if pressed_keys[pygame.K_ESCAPE]:
+            self.load_level(0)
+
         for event in events:
             if event.type == pygame.QUIT:
                 self.isRunning = False
