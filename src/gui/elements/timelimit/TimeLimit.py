@@ -6,7 +6,8 @@ class TimeLimit(GuiElement):
     def __init__(self, pos_x, pos_y, level_time):
         super().__init__(pos_x, pos_y, 0, 0)
         self.counter = Counter(pos_x, pos_y, lambda: self.formatted_time, prefix="Time Left:  ")
-        self.time = float(level_time)
+        self.level_time = float(level_time)
+        self.time = self.level_time
         self.formatted_time = ""
 
     def update(self, mouse, events, delta_time, keys, config, game_methods: GameMethods):
@@ -15,5 +16,12 @@ class TimeLimit(GuiElement):
             game_methods.restart_level()
 
         time_in_sec = int(self.time)
-        time_in_milli = int(self.time * 1000)
+        time_in_milli = int(self.time * 100) % 100
         self.formatted_time = str(time_in_sec) + ":" + str(time_in_milli)
+        self.counter.update(mouse, events, delta_time, keys, config, game_methods)
+
+    def draw(self, surface):
+        self.counter.draw(surface)
+
+    def restart_level(self):
+        self.time = self.level_time

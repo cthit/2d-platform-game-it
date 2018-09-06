@@ -164,6 +164,7 @@ class Level:
         self.color_map = get_color_map(self)
         self.map_image, self.map_shape = load_map_image(self)
         self.entities, self.tiles, self.entity_lookup_map = load_entities(self.color_map, self.map_image, self.map_shape)
+        self.level_time = int(self.config["General"]["timelimit"])
         if self.name in level_backgrounds:
             self.background = level_backgrounds[self.name]
         else:
