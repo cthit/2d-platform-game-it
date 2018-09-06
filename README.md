@@ -363,7 +363,7 @@ You can read more about how to use behaviours with entities [here](#entities-and
 ### Changing the UI
 
 The UI is defined by "Views", and each level can optionally have one view associated with it.
-To bind a view to a level, you simply have to add `View = ViewName` under the general tag in your config.ini
+To bind a view to a level, you simply have to add `View = ViewName` under the ```[GUI]``` tag in your config.ini. 
 
 All views are located as python scripts in the "views" folder.
 
@@ -379,3 +379,12 @@ def load_view(gui, game):
 ```
 
 The name of the view is defined by the name of the view file. So this would be MainMenu.py, and the main menu level would have `View = MainMenu` in its config.
+
+If the view is a pure GUI screen (not a game level), make sure the ```Type``` property under the ```[General]``` tag in the levels config to "Pure GUI" i.e. for the main menu:
+```
+[General]
+Name = Main Menu
+Type = Pure GUI
+Index = 0
+[GUI]
+View = MainMenu
