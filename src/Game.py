@@ -5,7 +5,7 @@ from src.camera.Camera import Camera
 from src.gui.Gui import Gui
 from src.gui.elements.text.TextBlock import TextBlock
 from src.level import Level
-from behaviours import Collide
+from behaviours import Collide, Collector
 
 
 class NoLevelFoundException(ValueError):
@@ -24,12 +24,17 @@ class Game:
         self.level = None
         self.gui = Gui()
         self.previous_level = None
+        self.last_level_coins = 0
 
     def load_level(self, index):
-        print(index)
         try:
             if self.level is not None:
                 self.level.clear()
+
+            try:
+                self.last_level_coins = self.level.get_entities("Player")[0].get_behaviour(Collector).get_num_collected("Coin")
+            except:
+                pass
 
             self.previous_level = self.level
             self.level = Level.get_level_by_index(index)
@@ -61,14 +66,14 @@ class Game:
     def load_next_level(self):
         '''method to change to next level (numberwise)'''
         curr_level = self.level
-        self.load_level(-3)
+        self.load_level(-2)
         self.render()
-        new_level_num = int(curr_level.config["General"]["index"])
+        new_level_num = self.previous_level + 1
 
         try:
             self.load_level(new_level_num + 1)
         except NoLevelFoundException:
-            self.load_level(-2)
+            self.load_level(-1)
 
     def update(self, delta_time):
         events = pygame.event.get()
