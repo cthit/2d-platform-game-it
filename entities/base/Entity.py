@@ -1,11 +1,10 @@
 import os
-import string
-from pdb import set_trace
-from typing import TypeVar, Union, Type
+from typing import TypeVar, Type, Dict
 
 import pygame
 
 from behaviours import Collide
+from behaviours.Behaviour import Behaviour
 from src.GameMethods import GameMethods
 from src.utils.ClassGetter import get_class_that_defined_method
 from src.utils.Renderable import Renderable
@@ -24,7 +23,7 @@ class Entity:
         self.y = y  # do not modify directly, use self.set_y
         self.width = 1  # do not modify directly, use self.set_width
         self.height = 1  # do not modify directly, use self.set_height
-        self.behaviours = {}
+        self.behaviours: Dict[str, Behaviour] = {}
         self.listeners = {}
         self.name = name
         self.remain_on_reset = False
@@ -210,6 +209,8 @@ class Entity:
         self.set_x(self.spawn_x)
         self.set_y(self.spawn_y)
         self.velocity = pygame.math.Vector2(0, 0)
+        for behavior in self.behaviours.values():
+            behavior.reset()
 
     def clear(self):
         self.deletion_pending = True
