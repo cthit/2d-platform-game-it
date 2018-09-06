@@ -4,7 +4,6 @@ from behaviours.Collide import Collide
 from behaviours.Health import Health
 from behaviours.KnockBack import KnockBack
 from entities.base.Entity import Entity
-from entities.enemy.Enemy import Enemy
 from src.GameMethods import GameMethods
 from tiles.base.Tile import Tile
 

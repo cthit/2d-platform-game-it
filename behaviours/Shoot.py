@@ -15,7 +15,9 @@ class Shoot(Behaviour):
 
     def update(self, delta_time, keys, config, game_methods: GameMethods):
         self.cooldown -= delta_time
-        if keys[pygame.K_SPACE] and self.cooldown <= 0:
+
+    def shoot(self, delta_time, keys, config, game_methods: GameMethods):
+        if self.cooldown <= 0:
             game_methods.play_sound("shoot-01.wav")
             self.cooldown = 1 / self.fire_rate
             velocity = pygame.Vector2(0, 0)

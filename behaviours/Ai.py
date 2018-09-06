@@ -1,5 +1,6 @@
 from behaviours.Behaviour import Behaviour
 from behaviours.Collide import Collide
+from behaviours.Shoot import Shoot
 from behaviours.Jump import Jump
 from behaviours.Move import Move
 from entities.base.Entity import Entity
@@ -17,6 +18,7 @@ class Ai(Behaviour):
             self.idle()
         else:
             self.move_towards(player)
+            self.owner.get_behaviour(Shoot).shoot(delta_time, keys, config, game_methods)
 
 
     def look_for_player(self, search_range=5):
