@@ -6,6 +6,7 @@ from src.gui.Gui import Gui
 from src.gui.elements.text.TextBlock import TextBlock
 from src.level import Level
 from behaviours import Collide, Collector
+from tiles.base.Tile import Tile
 
 
 class NoLevelFoundException(ValueError):
@@ -96,8 +97,9 @@ class Game:
         self.camera.clear()
         bounding_box = self.camera.get_bounding_box()
         self.camera.render_background(self.level.background, bounding_box)
-        for renderable in bounding_box.get_visible():
-            self.camera.render(renderable, bounding_box)
+        for entity_or_tile in bounding_box.get_visible():
+            for renderable in entity_or_tile.get_renderables():
+                self.camera.render(renderable, bounding_box)
 
         self.gui.draw(self.screen)
         pygame.display.update()

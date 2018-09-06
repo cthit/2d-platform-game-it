@@ -23,6 +23,7 @@ class Clock(GuiElement):
         self.formatted_time = str(hours) + ":" + str(minutes) + ":" + str(seconds) + ":" + str(milli_seconds)
         self.counter.update(mouse, events, delta_time, keys, config, game_methods)
 
+
     def draw(self, surface):
         self.counter.draw(surface)
 

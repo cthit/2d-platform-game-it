@@ -61,7 +61,6 @@ class Camera:
             bounding_box = self.get_bounding_box()
         x, _ = bounding_box.x_interval
         y, _ = bounding_box.y_interval
-
         pos = ((renderable.x - x) * bounding_box.block_width, (renderable.y - y) * bounding_box.block_height)
         size = (int(renderable.width * bounding_box.block_width), int(renderable.height * bounding_box.block_height))
         sprite = pygame.transform.scale(renderable.sprite, size)

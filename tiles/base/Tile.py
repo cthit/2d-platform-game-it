@@ -4,6 +4,7 @@ from pathlib import Path
 import pygame
 
 from behaviours import Collide
+from src.utils.Renderable import Renderable
 
 sprite_map = {}
 image_file_formats = [".png", ".jpg", ".jpeg", ".bmp"]
@@ -32,9 +33,10 @@ class Tile:
                 sprite_map[name] = self.sprite
             except:
                 print("Could not load sprite for " + name)
+        self.renderable = Renderable(x, y, self.width, self.height, self.sprite)
 
-    def draw(self, screen):
-        screen.blit(self.sprite, (self.x, self.y))
+    def get_renderables(self):
+        return [self.renderable]
 
     def get_top(self):
         return self.y
