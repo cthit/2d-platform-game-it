@@ -35,4 +35,4 @@ class Player(Character):
 
     def die(self):
         super().die()
-        self._game_methods.restart_level()
+        self._game_methods.load_level_failed_screen()
