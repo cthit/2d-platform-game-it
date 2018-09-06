@@ -1,10 +1,12 @@
 import os
+from pathlib import Path
 
 import pygame
 
 from src.GameMethods import GameMethods
 
 LEFT = 1
+image_file_formats = [".png", ".jpg", ".jpeg", ".bmp"]
 
 class GuiElement:
     def __init__(self, pos_x, pos_y, width=0, height=0, image=None):
@@ -16,7 +18,12 @@ class GuiElement:
         self._is_mouse_over = False
 
         if image is None:
-            path = os.path.dirname(os.path.realpath(__file__)) + "/elements/" + self.__class__.__name__.lower() + "/" + self.__class__.__name__ + ".png"
+
+            for format in image_file_formats:
+                path = os.path.dirname(os.path.realpath(__file__)) + "/elements/" + self.__class__.__name__.lower() + "/" + self.__class__.__name__ + format
+                if Path(path).is_file():
+                    break
+
             try:
                 self.image = pygame.image.load(path)
                 if self.width == 0 and self.height == height:

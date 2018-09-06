@@ -1,10 +1,12 @@
 import os
+from pathlib import Path
 
 import pygame
 
 from behaviours import Collide
 
 sprite_map = {}
+image_file_formats = [".png", ".jpg", ".jpeg", ".bmp"]
 
 class Tile:
     """A simple tile in the gameworld"""
@@ -21,7 +23,10 @@ class Tile:
         if name in sprite_map:
             self.sprite = sprite_map[name]
         else:
-            path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../" + name.lower() + "/" + name + ".png")
+            for format in image_file_formats:
+                path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../" + name.lower() + "/" + name + format)
+                if Path(path).is_file():
+                    break
             try:
                 self.sprite = pygame.image.load(path)
                 sprite_map[name] = self.sprite
