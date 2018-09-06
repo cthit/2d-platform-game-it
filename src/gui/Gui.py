@@ -42,3 +42,7 @@ class Gui:
     def draw(self, screen):
         for element in self.gui_elements:
             element.draw(screen)
+
+    def restart_level(self):
+        for element in self.gui_elements:
+            element.restart_level()

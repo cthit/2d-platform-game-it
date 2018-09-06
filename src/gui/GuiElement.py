@@ -63,3 +63,6 @@ class GuiElement:
     def draw(self, surface):
         if self.image is not None:
             surface.blit(self.image, (self.x, self.y))
+
+    def restart_level(self):
+        pass

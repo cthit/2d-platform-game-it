@@ -47,10 +47,11 @@ class Game:
             pass
         return True
 
-    def reload_entities(self):
+    def restart_level(self):
         self.level.revive_entities()
         for entity in [*self.level.entities]:
             entity.reset()
+        self.gui.restart_level()
 
     def load_next_level(self):
         '''method to change to next level (numberwise)'''
