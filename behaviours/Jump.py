@@ -17,6 +17,7 @@ class Jump(Behaviour):
     def update(self, delta_time, keys, config, game_methods: GameMethods):
         self._game_methods = game_methods
         c = self.owner.get_behaviour(Collide)
+        self.can_jump = False
         if len(c.check_bottom(0.05)) > 0:
             if self.owner.velocity.y >= 0:
                 self.can_jump = True
