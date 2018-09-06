@@ -12,7 +12,7 @@ class Goal(Entity):
 
     def update(self, deltaTime, keys, config, game_methods: GameMethods):
         super().update(deltaTime, keys, config, game_methods)
-        self.go_to_next_level = game_methods.load_level_complete()
+        self.go_to_next_level = game_methods.load_level_complete
 
     def trigger(self, collider):
         if collider.name == "Player":

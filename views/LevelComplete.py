@@ -4,7 +4,14 @@ from src.gui.elements.text.TextBlock import TextBlock
 
 def load_view(gui, game_methods: GameMethods):
     gui.add_gui_element(TextBlock("You completed the level! :)", 250, 50))
-    gui.add_gui_element(TextBlock("Your score was: " + str(game_methods.get_last_level_coins), 280, 75))
+    num_coins = game_methods.get_last_level_coins()
+    text = "You collected " + str(num_coins)
+    if num_coins == 1:
+        text = text + " coin"
+    else:
+        text = text + " coins"
+
+    gui.add_gui_element(TextBlock(text, 265, 90))
 
     continue_button = Button("Next Level", 300, 150,
                              lambda: game_methods.load_next_level())
