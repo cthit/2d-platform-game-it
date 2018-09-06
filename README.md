@@ -20,14 +20,14 @@ The purpose of the project is to be easily modifiable both for people with and w
     - [Simplest modifications](#simplest-modifications)
         - [Level Creation](#level-creation)
             - [Config details](#config-details)
+            - [Pre-Existing Levels](#pre-existing-levels)
         - [Creating new tiles](#creating-new-tiles)
     - [Intermediate Modifications](#intermediate-modifications)
         - [Creating new entities](#creating-new-entities)
                 - [Entities and Behaviours](#entities-and-behaviours)
         - [Creating new Behaviours](#creating-new-behaviours)
         - [Changing the UI](#changing-the-ui)
-    - [Advanced Modifications](#advanced-modifications)
-
+        
 ---
 
 ## Installation (Overly explicit)
@@ -144,8 +144,8 @@ Name = Grass Level
 Index = 2
 ```
 
-The name property is simply a name for the level and can be whatever you want to name your level.
-The index property decides which order the levels come in and can be any number >= 1 (if there are more than one with the same index one of them will be selected by random).
+The **name** property is simply a name for the level and can be whatever you want to name your level.
+The **index** property decides which order the levels come in and can be any number >= 1 (if there are more than one with the same index one of them will be selected by random). 
 
 There are also several other properties and tags which are optional and will be using the default settings if not present.
 These are:
@@ -216,6 +216,19 @@ Y = 0
 Y-span = 10
 Target = Player
 ```
+
+##### Pre-Existing Levels
+
+There are a number of levels already in the game so to avoid unintentional index-clashes, here's a list of the currently existing levels by index, note that indexes <= 0 are used for non game-level levels such as menu screens.
+
+- -10: "large_level_test" a testing level used mostly for optimization purposes.
+- -4: "level_win_screen" the screen for when the player has completed a level.
+- -3: "level_fail_screen" the screen for when the player has faileda level.
+- -2: "win_screen" the screen for when the player has won the game.
+- 0: "main_menu" the main menu screen.
+- 1: "level1" the first level.
+- 2: "level2" the seconds level.
+- 3: "level3" the third level.
 
 ### Creating new tiles
 
@@ -366,7 +379,3 @@ def load_view(gui, game):
 ```
 
 The name of the view is defined by the name of the view file. So this would be MainMenu.py, and the main menu level would have `View = MainMenu` in its config.
-
----
-
-## Advanced Modifications
