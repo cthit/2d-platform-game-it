@@ -15,7 +15,7 @@ class Clock(GuiElement):
     def update(self, mouse, events, delta_time, keys, config, game_methods: GameMethods):
         self.time += delta_time
         time_in_sec = self.time
-        milli_seconds = int(time_in_sec * 100)
+        milli_seconds = int(time_in_sec * 100) % 100
         seconds = int(time_in_sec % 60)
         time_in_min = (time_in_sec - seconds) / 60
         minutes = int(time_in_min % 60)
