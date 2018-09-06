@@ -26,3 +26,6 @@ class Collector(Behaviour):
             return self.collected[collectible_name]
         else:
             return 0
+
+    def reset(self):
+        self.collected = {}
