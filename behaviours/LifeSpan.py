@@ -9,4 +9,4 @@ class LifeSpan(Behaviour):
     def update(self, delta_time, keys, config, game_methods: GameMethods):
         self.remaining_time -= delta_time
         if self.remaining_time <= 0:
-            game_methods.kill_entity(self.owner)
+            self.owner.die()

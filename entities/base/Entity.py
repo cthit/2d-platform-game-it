@@ -8,6 +8,7 @@ import pygame
 from behaviours import Collide
 from src.GameMethods import GameMethods
 from src.utils.ClassGetter import get_class_that_defined_method
+from src.utils.Renderable import Renderable
 
 image_file_formats = [".png", ".jpg", ".jpeg", ".bmp"]
 
@@ -195,6 +196,12 @@ class Entity:
 
     def get_right(self):
         return self.x + self.width
+
+    def get_renderables(self):
+        res = [Renderable(self.x, self.y, self.width, self.height, self.sprite)]
+        for behavior in self.behaviours.values():
+            res.extend(behavior.get_renderables())
+        return res
 
     def reset(self):
         if not self.remain_on_reset:

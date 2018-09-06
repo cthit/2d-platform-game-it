@@ -5,7 +5,9 @@ from behaviours.Health import Health
 from behaviours.Jump import Jump
 from behaviours.KnockBack import KnockBack
 from behaviours.Move import Move
+from behaviours.Shoot import Shoot
 from entities.base.Entity import Entity
+from entities.bullet.Bullet import Bullet
 from src.GameMethods import GameMethods
 from behaviours.Shoot import Shoot
 from entities.bullet.Bullet import Bullet

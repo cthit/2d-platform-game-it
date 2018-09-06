@@ -8,3 +8,6 @@ class Behaviour:
 
     def update(self, delta_time, keys, config, game_methods):
         pass
+
+    def get_renderables(self):
+        return []
