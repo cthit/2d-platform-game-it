@@ -6,12 +6,12 @@ from behaviours.LifeSpan import LifeSpan
 from entities.base.Entity import Entity
 from src.GameMethods import GameMethods
 
-
 class Shoot(Behaviour):
     def __init__(self, ammo_class, fire_rate=1):
         self.ammo_class = ammo_class
         self.fire_rate = fire_rate
         self.cooldown = 0
+        self.bullet_speed = 25
 
     def update(self, delta_time, keys, config, game_methods: GameMethods):
         self.cooldown -= delta_time
@@ -26,10 +26,10 @@ class Shoot(Behaviour):
             flip_image = False
             if move is not None:
                 if move.current_direction == "right":
-                    velocity = pygame.Vector2(5, 0)
+                    velocity = pygame.Vector2(self.bullet_speed, 0)
                     x_offset = 1
                 else:
-                    velocity = pygame.Vector2(-5, 0)
+                    velocity = pygame.Vector2(-self.bullet_speed, 0)
                     x_offset = -1
 
             projectile: Entity = game_methods.spawn_entity(
