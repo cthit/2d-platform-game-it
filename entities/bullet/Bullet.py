@@ -37,9 +37,11 @@ class Bullet(Trigger):
     def on_collide(self, colliding_objects, delta_time, keys, config, game_methods: GameMethods):
         die = False
         for colliding in colliding_objects:
-            if isinstance(colliding, Tile) or colliding in self.objects_to_ignore:
+            if colliding in self.objects_to_ignore:
                 continue
             die = True
+            if isinstance(colliding, Tile):
+                continue
             health: Health = colliding.get_behaviour(Health)
             knock_back: KnockBack = colliding.get_behaviour(KnockBack)
             if knock_back is not None:
