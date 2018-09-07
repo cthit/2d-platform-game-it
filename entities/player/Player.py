@@ -3,6 +3,7 @@ import pygame
 from behaviours.Collector import Collector
 from behaviours.Health import Health
 from behaviours.Jump import Jump
+from behaviours.KnockBack import KnockBack
 from behaviours.Move import Move
 from behaviours.Shoot import Shoot
 from behaviours.Health import Health
@@ -15,6 +16,7 @@ class Player(Character):
     def __init__(self, x, y, name):
         super().__init__(x, y, name)
         move = self.register_behaviour(Move(self.movement_speed))
+        self.register_behaviour(KnockBack(mass=20))
         self.register_behaviour(Shoot(ammo_class=Bullet, fire_rate=10, shoot_key=pygame.K_SPACE))
         self.register_behaviour(Health(100))
         self.register_behaviour(Collector())

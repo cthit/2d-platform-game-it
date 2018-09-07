@@ -18,6 +18,7 @@ class Enemy(Entity):
     def __init__(self, x, y, name):
         Entity.__init__(self, x, y, name)
         self.get_behaviour(Collide).affects_motion = True
+        self.mass = 10
         self.movement_speed = 7
         self.damage = 10
         self.cooldown = 0
@@ -33,6 +34,10 @@ class Enemy(Entity):
     def update(self, delta_time, keys, config, game_methods: GameMethods):
         super().update(delta_time, keys, config, game_methods)
         self.cooldown -= delta_time
+        if self.velocity.x > 0:
+            self.is_flipped_x = True
+        else:
+            self.is_flipped_x = False
         if self.cooldown <= 0:
             self.cooldown = 1 / self.damageRate
             c = self.get_behaviour(Collide)
