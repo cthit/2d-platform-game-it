@@ -42,7 +42,10 @@ class Game:
             self.game_methods.time_left = 0
             self.level = Level.get_level_by_index(index)
             if self.level is None:
-                raise NoLevelFoundException
+                if index != 0:
+                    self.load_level(0)
+                else:
+                    raise NoLevelFoundException
 
             self.level.load()
             self.gui.clear_view()
