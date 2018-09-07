@@ -111,13 +111,14 @@ GameMethods is an object that exposes certain methods of the main Game class:
 - `kill_entity(entity)` removes an entity from the game
 - `get_level()` gets the current level object
 - `get_previous_level_index()` returns the index of the previous level
-- `load_level_failed_screen()` displays the "level failed" screen
+- `load_level_lost_screen()` displays the "level failed" screen (generally unused, use player_lost method instead)
 - `load_main_menu()` displays the main menu
 - `get_last_level_coins()` get number of coins collected in previous level
 - `load_level_complete()` displays the "level complete" screen
 - `get_player_coins()` returns the current number of coins collected by the player
 - `time_left` the time that is left on the current level (0 if it's not enabled for the level)
 - `last_level_time_left` the time that was left when the previous level was finished (0 if it wasn't enabled on that level)
+- `player_lost(reason_for_death)` loads the level failed screen with the the (string) `reason_for_death` shown as a reason.
 
 ### Behaviours
 
