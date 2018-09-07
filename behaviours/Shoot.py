@@ -45,5 +45,6 @@ class Shoot(Behaviour):
                 self.ammo_class,
                 self.owner.get_horizontal_center() + x_offset,
                 self.owner.get_vertical_center())
+            projectile.ignore_object(self.owner)
             projectile.set_velocity(velocity)
             projectile.register_behaviour(LifeSpan(5))

@@ -18,6 +18,10 @@ class Bullet(Trigger):
         self.mass = 10
         self.set_height(0.2)
         self.set_width(0.4)
+        self.objects_to_ignore = []
+
+    def ignore_object(self, object):
+        self.objects_to_ignore.append(object)
 
     def update(self, delta_time, keys, config, game_methods: GameMethods):
         super().update(delta_time, keys, config, game_methods)
@@ -31,9 +35,11 @@ class Bullet(Trigger):
         self.velocity = velocity
 
     def on_collide(self, colliding_objects, delta_time, keys, config, game_methods: GameMethods):
+        die = False
         for colliding in colliding_objects:
-            if isinstance(colliding, Tile):
+            if isinstance(colliding, Tile) or colliding in self.objects_to_ignore:
                 continue
+            die = True
             health: Health = colliding.get_behaviour(Health)
             knock_back: KnockBack = colliding.get_behaviour(KnockBack)
             if knock_back is not None:
@@ -41,8 +47,9 @@ class Bullet(Trigger):
             if health is not None:
                 health.damage(self.damage)
             game_methods.play_sound("hit-02.wav")
-        game_methods.kill_entity(self)
-        self.clear()
+        if die:
+            game_methods.kill_entity(self)
+            self.clear()
 
 
 
