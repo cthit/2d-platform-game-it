@@ -9,8 +9,15 @@ from src.GameMethods import GameMethods
 
 
 class Ai(Behaviour):
+    def __init__(self):
+        Behaviour.__init__(self)
+        self.turnCooldown = 0
+        self.turnDelay = 0.35
+        self.facingRight = False
+
     def update(self, delta_time, keys, config, game_methods: GameMethods):
         # Super simple enemy Ai as an example
+        self.turnCooldown -= delta_time
 
         # Find player if it is within 10 tiles
         player = self.look_for_player(search_range=10)
@@ -52,12 +59,20 @@ class Ai(Behaviour):
 
     def move_towards(self, entity):
         # Try to move towards entity
-        if self.owner.has_behaviour(Move):
+        if self.owner.has_behaviour(Move) and self.turnCooldown <= 0.0:
             move_behaviour = self.owner.get_behaviour(Move)
             direction = self.get_direction_towards(entity)
             if direction == "right":
+                if not self.facingRight:
+                    self.facingRight = True
+                    self.turnCooldown = self.turnDelay
+                    return
                 move_behaviour.move_right()
             elif direction == "left":
+                if self.facingRight:
+                    self.facingRight = False
+                    self.turnCooldown = self.turnDelay
+                    return
                 move_behaviour.move_left()
 
         # Jump if entity is higher up
