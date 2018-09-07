@@ -116,6 +116,8 @@ GameMethods is an object that exposes certain methods of the main Game class:
 - `get_last_level_coins()` get number of coins collected in previous level
 - `load_level_complete()` displays the "level complete" screen
 - `get_player_coins()` returns the current number of coins collected by the player
+- `time_left` the time that is left on the current level (0 if it's not enabled for the level)
+- `last_level_time_left` the time that was left when the previous level was finished (0 if it wasn't enabled on that level)
 
 ### Behaviours
 
