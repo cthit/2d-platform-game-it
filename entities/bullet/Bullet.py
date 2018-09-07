@@ -4,11 +4,12 @@ from behaviours.Collide import Collide
 from behaviours.Health import Health
 from behaviours.KnockBack import KnockBack
 from entities.base.Entity import Entity
+from entities.trigger_base.Trigger import Trigger
 from src.GameMethods import GameMethods
 from tiles.base.Tile import Tile
 
 
-class Bullet(Entity):
+class Bullet(Trigger):
     def __init__(self, x, y, name):
         Entity.__init__(self, x, y, name)
         c = self.get_behaviour(Collide)
@@ -20,13 +21,19 @@ class Bullet(Entity):
 
     def update(self, delta_time, keys, config, game_methods: GameMethods):
         super().update(delta_time, keys, config, game_methods)
-        c = self.get_behaviour(Collide)
         if self.velocity.x < 0:
             self.is_flipped_x = True
-        for colliding in c.check_inside():
+
+    def set_damage(self, damage):
+        self.damage = damage
+
+    def set_velocity(self, velocity):
+        self.velocity = velocity
+
+    def on_collide(self, colliding_objects, delta_time, keys, config, game_methods: GameMethods):
+        for colliding in colliding_objects:
             if isinstance(colliding, Tile):
-                self.die()
-                return
+                continue
             health: Health = colliding.get_behaviour(Health)
             knock_back: KnockBack = colliding.get_behaviour(KnockBack)
             if knock_back is not None:
@@ -34,13 +41,9 @@ class Bullet(Entity):
             if health is not None:
                 health.damage(self.damage)
             game_methods.play_sound("hit-02.wav")
-            self.die()
+        game_methods.kill_entity(self)
+        self.clear()
 
-    def set_damage(self, damage):
-        self.damage = damage
-
-    def set_velocity(self, velocity):
-        self.velocity = velocity
 
 
 

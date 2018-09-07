@@ -6,6 +6,7 @@ from behaviours.LifeSpan import LifeSpan
 from entities.base.Entity import Entity
 from src.GameMethods import GameMethods
 
+
 class Shoot(Behaviour):
     def __init__(self, ammo_class, fire_rate=1, projectile_speed=15, shoot_key=None):
         self.ammo_class = ammo_class

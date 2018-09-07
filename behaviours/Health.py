@@ -9,6 +9,7 @@ _BAR_HEIGHT = 0.1
 
 class Health(Behaviour):
     def __init__(self, hit_points=10, max_hit_points=10, show_health_bar=False):
+        self.initial_hit_points = hit_points
         self.max_hit_points = max_hit_points
         self.hit_points = hit_points
         self.show_health_bar = show_health_bar
@@ -29,6 +30,9 @@ class Health(Behaviour):
         if self.health_bar is None:
             self.health_bar = HealthBar(self.owner, self)
         return [self.health_bar.as_renderable()]
+
+    def reset(self):
+        self.hit_points = self.initial_hit_points
 
 
 class HealthBar():

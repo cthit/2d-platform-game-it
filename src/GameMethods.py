@@ -21,10 +21,11 @@ class GameMethods:
         self.time_left = 0
         self.last_level_time_left = 0
 
-    def play_sound(self, file_name: str):
+    def play_sound(self, file_name: str, volume=0.1):
         if file_name is not None:
             #if not file_name in _sounds:
-            sound = pygame.mixer.Sound("../resources/sound/" + file_name)
+            sound = pygame.mixer.Sound("../resources/sound/"+file_name)
+            sound.set_volume(volume)
             sound.play()
             #    _sounds[file_name] = sound
             #_sounds[file_name].play()

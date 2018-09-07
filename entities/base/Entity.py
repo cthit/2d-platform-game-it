@@ -113,55 +113,74 @@ class Entity:
             if self.is_dead:
                 return
 
-        self.update_position(delta_time)
+        self.update_position(delta_time, keys, config, game_methods)
         if self.deletion_pending:
             self.clear()
 
     def die(self):
         self._game_methods.kill_entity(self)
 
-    def update_position(self, delta_time):
+    def update_position(self, delta_time, keys, config, game_methods: GameMethods):
         dx = delta_time * self.velocity.x
         dy = delta_time * self.velocity.y
 
         c = self.get_behaviour(Collide.Collide)
-        if c is None or not c.affects_motion:
-            self.set_y(self.y + dy)
-            self.set_x(self.x + dx)
+        if dy < 0:
+            colliding_top = c.check_top(abs(dy))
+            if len(colliding_top) <= 0:
+                self.set_y(self.y + dy)
+            else:
+                self.on_collide(colliding_top, delta_time, keys, config, game_methods)
+                self.on_collide_top(colliding_top, delta_time, keys, config, game_methods)
         else:
-            friction = (1 / (1 + self.friction_coefficient)) ** delta_time
-            if dy < 0:
-                colliding_top = c.check_top(abs(dy))
-                if len(colliding_top) <= 0:
-                    self.set_y(self.y + dy)
-                else:
-                    self.move_top_to(Collide.get_bottom_most_of(colliding_top).get_bottom())
-                    self.velocity.y = 0
-                    self.velocity.x *= friction
+            colliding_bottom = c.check_bottom(abs(dy))
+            if len(colliding_bottom) <= 0:
+                self.set_y(self.y + dy)
             else:
-                colliding_bottom = c.check_bottom(abs(dy))
-                if len(colliding_bottom) <= 0:
-                    self.set_y(self.y + dy)
-                else:
-                    self.move_bottom_to(Collide.get_top_most_of(colliding_bottom).get_top())
-                    self.velocity.y = 0
-                    self.velocity.x *= friction
-            if dx < 0:
-                colliding_left = c.check_left(abs(dx))
-                if len(colliding_left) <= 0:
-                    self.set_x(self.x + dx)
-                else:
-                    self.move_left_to(Collide.get_right_most_of(colliding_left).get_right())
-                    self.velocity.x = 0
-                    self.velocity.y *= friction
+                self.on_collide(colliding_bottom, delta_time, keys, config, game_methods)
+                self.on_collide_bottom(colliding_bottom, delta_time, keys, config, game_methods)
+        if dx < 0:
+            colliding_left = c.check_left(abs(dx))
+            if len(colliding_left) <= 0:
+                self.set_x(self.x + dx)
             else:
-                colliding_right = c.check_right(abs(dx))
-                if len(colliding_right) <= 0:
-                    self.set_x(self.x + dx)
-                else:
-                    self.move_right_to(Collide.get_left_most_of(colliding_right).get_left())
-                    self.velocity.x = 0
-                    self.velocity.y *= friction
+                self.on_collide(colliding_left, delta_time, keys, config, game_methods)
+                self.on_collide_left(colliding_left, delta_time, keys, config, game_methods)
+        else:
+            colliding_right = c.check_right(abs(dx))
+            if len(colliding_right) <= 0:
+                self.set_x(self.x + dx)
+            else:
+                self.on_collide(colliding_right, delta_time, keys, config, game_methods)
+                self.on_collide_right(colliding_right, delta_time, keys, config, game_methods)
+
+    def on_collide(self, colliding_objects, delta_time, keys, config, game_methods: GameMethods):
+        pass
+
+    def on_collide_top(self, colliding_objects, delta_time, keys, config, game_methods: GameMethods):
+        friction = (1 / (1 + self.friction_coefficient)) ** delta_time
+        self.move_top_to(Collide.get_bottom_most_of(colliding_objects).get_bottom())
+        self.velocity.y = 0
+        self.velocity.x *= friction
+
+    def on_collide_bottom(self, colliding_objects, delta_time, keys, config, game_methods: GameMethods):
+        friction = (1 / (1 + self.friction_coefficient)) ** delta_time
+        self.move_bottom_to(Collide.get_top_most_of(colliding_objects).get_top())
+        self.velocity.y = 0
+        self.velocity.x *= friction
+
+    def on_collide_left(self, colliding_objects, delta_time, keys, config, game_methods: GameMethods):
+        friction = (1 / (1 + self.friction_coefficient)) ** delta_time
+        self.move_left_to(Collide.get_right_most_of(colliding_objects).get_right())
+        self.velocity.x = 0
+        self.velocity.y *= friction
+
+    def on_collide_right(self, colliding_objects, delta_time, keys, config, game_methods: GameMethods):
+        friction = (1 / (1 + self.friction_coefficient)) ** delta_time
+        self.move_right_to(Collide.get_left_most_of(colliding_objects).get_left())
+        self.velocity.x = 0
+        self.velocity.y *= friction
+
 
     def move_top_to(self, y):
         self.set_y(y)
