@@ -38,6 +38,8 @@ class Game:
                 self.previous_level_index = int(self.level.config["General"]["index"])
                 self.level.clear()
 
+            self.game_methods.last_level_time_left = self.game_methods.time_left
+            self.game_methods.time_left = 0
             self.level = Level.get_level_by_index(index)
             if self.level is None:
                 raise NoLevelFoundException

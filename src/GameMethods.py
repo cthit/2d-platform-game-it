@@ -18,11 +18,13 @@ class GameMethods:
         self.get_last_level_coins = lambda: game.last_level_coins
         self.load_level_complete = lambda: self.load_level_by_index(-4)
         self.get_player_coins = lambda: game.get_player_coins()
+        self.time_left = 0
+        self.last_level_time_left = 0
 
     def play_sound(self, file_name: str):
         if file_name is not None:
             #if not file_name in _sounds:
-            sound = pygame.mixer.Sound("../resources/sound/"+file_name)
+            sound = pygame.mixer.Sound("../resources/sound/" + file_name)
             sound.play()
             #    _sounds[file_name] = sound
             #_sounds[file_name].play()

@@ -19,6 +19,7 @@ class TimeLimit(GuiElement):
         time_in_milli = int(self.time * 100) % 100
         self.formatted_time = str(time_in_sec) + ":" + str(time_in_milli)
         self.counter.update(mouse, events, delta_time, keys, config, game_methods)
+        game_methods.time_left = self.time
 
     def draw(self, surface):
         self.counter.draw(surface)
