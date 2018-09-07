@@ -71,7 +71,7 @@ class Game:
         self.render()
 
         try:
-            self.load_level(new_level_num + 1)
+            self.load_level(new_level_num)
         except NoLevelFoundException:
             self.load_level(-1)
 
