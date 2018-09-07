@@ -31,6 +31,6 @@ class GameMethods:
             #    _sounds[file_name] = sound
             #_sounds[file_name].play()
 
-    def player_lost(self, reasonForDeath ="Hell, I don't know"):
-        self.reason_for_latest_death = reasonForDeath
+    def player_lost(self, reason_for_death ="Hell, I don't know"):
+        self.reason_for_latest_death = reason_for_death
         self.load_level_lost_screen()
