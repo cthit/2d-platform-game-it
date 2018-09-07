@@ -19,20 +19,25 @@ class Button(GuiElement):
         self.text_color = text_color
         self.text_surface = font.render(text, True, text_color)
         self.callback = callback
-        self.size_multiplier = 1
+        self.width = self.image.get_width()
+        self.height = self.image.get_height()
 
     def draw(self, surface):
         super(Button, self).draw(surface)
         (tcx, tcy, icx, icy) = self.text_surface.get_rect().center + self.image.get_rect().center
         surface.blit(self.text_surface, (self.x + icx - tcx, self.y + icy - tcy))
 
-    def resize_button_to_width(self, new_width):
-        self.size_multiplier = new_width / self.image.get_rect().width
+    def resize_button_width(self, new_width):
+        self.width = new_width
         self.change_image(self.image)
 
-    def resize_button_to_height(self, new_height):
-        self.size_multiplier = new_height / self.image.get_rect().height
+    def resize_button_height(self, new_height):
+        self.height = new_height
         self.change_image(self.image)
+
+    def resize_button(self, new_width, new_height):
+        self.resize_button_width(new_width)
+        self.resize_button_height(new_height)
 
     def on_hover(self):
         self.change_image(button_images["light"])
@@ -47,6 +52,4 @@ class Button(GuiElement):
         self.change_image(button_images["green"])
 
     def change_image(self, image):
-        new_width = int(image.get_rect().width * self.size_multiplier)
-        new_height = int(image.get_rect().height * self.size_multiplier)
-        self.image = pygame.transform.scale(image, (new_width, new_height))
+        self.image = pygame.transform.scale(image, (self.width, self.height))

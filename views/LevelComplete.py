@@ -15,11 +15,11 @@ def load_view(gui, game_methods: GameMethods):
 
     continue_button = Button("Next Level", 300, 150,
                              lambda: game_methods.load_next_level())
-    continue_button.resize_button_to_height(50)
+    continue_button.resize_button(200, 50)
 
     main_menu_button = Button("Main Menu", 300, 250,
                               lambda: game_methods.load_main_menu())
-    main_menu_button.resize_button_to_height(50)
+    main_menu_button.resize_button(200, 50)
     gui.add_gui_element(continue_button)
     gui.add_gui_element(main_menu_button)
 
