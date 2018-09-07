@@ -1,4 +1,4 @@
-# 2d-platform-game-it
+# CodeIT
 
 A basic game/framework for a 2d-platformer built with python.
 The purpose of the project is to be easily modifiable both for people with and without prior coding experience.
