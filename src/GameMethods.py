@@ -13,13 +13,14 @@ class GameMethods:
         self.kill_entity = lambda entity: game.level.kill_entity(entity)
         self.get_level = lambda: game.level
         self.get_previous_level_index = lambda: game.previous_level_index
-        self.load_level_failed_screen = lambda: self.load_level_by_index(-3)
+        self.load_level_lost_screen = lambda: self.load_level_by_index(-3)
         self.load_main_menu = lambda: self.load_level_by_index(0)
         self.get_last_level_coins = lambda: game.last_level_coins
         self.load_level_complete = lambda: self.load_level_by_index(-4)
         self.get_player_coins = lambda: game.get_player_coins()
         self.time_left = 0
         self.last_level_time_left = 0
+        self.reason_for_latest_death = ""
 
     def play_sound(self, file_name: str):
         if file_name is not None:
@@ -28,3 +29,7 @@ class GameMethods:
             sound.play()
             #    _sounds[file_name] = sound
             #_sounds[file_name].play()
+
+    def player_lost(self, reasonForDeath ="Hell, I don't know"):
+        self.reason_for_latest_death = reasonForDeath
+        self.load_level_lost_screen()

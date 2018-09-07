@@ -34,4 +34,4 @@ class Player(Character):
     def die(self):
         super().die()
         self.register_behaviour(Health(hit_points=50, show_health_bar=False))
-        self._game_methods.load_level_failed_screen()
+        self._game_methods.player_lost("Player died")

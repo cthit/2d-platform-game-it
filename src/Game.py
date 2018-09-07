@@ -72,6 +72,7 @@ class Game:
     def load_next_level(self):
         '''method to change to next level (numberwise)'''
         new_level_num = self.previous_level_index + 1
+        self.game_methods.reason_for_latest_death = ""
         self.load_level(-2)
         self.render()
 

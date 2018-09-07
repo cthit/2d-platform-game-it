@@ -13,7 +13,8 @@ class TimeLimit(GuiElement):
     def update(self, mouse, events, delta_time, keys, config, game_methods: GameMethods):
         self.time -= delta_time
         if self.time <= 0:
-            game_methods.load_level_failed_screen()
+            game_methods.player_lost("Time ran out")
+
 
         time_in_sec = int(self.time)
         time_in_milli = int(self.time * 100) % 100
