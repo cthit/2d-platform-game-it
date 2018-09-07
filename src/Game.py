@@ -20,7 +20,7 @@ class Game:
         pygame.font.init()
         pygame.display.set_caption("2d platform game it")
         self.game_methods = GameMethods(self)
-        self.screen = pygame.display.set_mode((800, 450))
+        self.screen = pygame.display.set_mode((1280, 720))
         self.camera = Camera(self.screen)
         self.isRunning = True
         self.level = None
